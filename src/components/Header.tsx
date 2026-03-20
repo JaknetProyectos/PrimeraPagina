@@ -1,0 +1,85 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X, ShoppingBag, Settings } from "lucide-react";
+
+const navItems = [
+  { href: "/experiencias", label: "Experiencias" },
+  { href: "/destinos", label: "Destinos" },
+  { href: "/#contactanos", label: "Contacto" },
+];
+
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white elevation-2">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-10 h-10 bg-[var(--md-primary)] rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">A</span>
+            </div>
+            <span className="font-medium text-[var(--md-on-surface)] text-lg hidden sm:block">
+              Adventure Trip
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="px-4 py-2 text-[var(--md-on-surface-medium)] hover:text-[var(--md-primary)] hover:bg-[var(--md-primary)]/5 rounded transition-colors font-medium text-sm uppercase tracking-wide"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Right side */}
+          <div className="flex items-center gap-2">
+            {/* Admin Link */}
+            <Link
+              href="/admin"
+              className="p-2 text-[var(--md-on-surface-medium)] hover:text-[var(--md-primary)] hover:bg-[var(--md-primary)]/5 rounded-full transition-colors"
+              title="Admin"
+            >
+              <Settings className="w-5 h-5" />
+            </Link>
+
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              className="md:hidden p-2 text-[var(--md-on-surface-medium)] hover:bg-gray-100 rounded-full transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <nav className="md:hidden bg-white border-t border-gray-100">
+          <div className="container mx-auto px-4 py-2">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-3 text-[var(--md-on-surface)] hover:bg-gray-50 rounded font-medium"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
+    </header>
+  );
+}
