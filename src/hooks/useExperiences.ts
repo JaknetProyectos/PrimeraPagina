@@ -21,7 +21,7 @@ interface UseExperiencesResult {
   hasPrevPage: boolean;
 }
 
-export function useExperiences(options = {}) {
+export function useExperiences(options : UseExperiencesOptions = {}) {
   const { destinationSlug, page = 1, pageSize = 6 } = options;
 
   const [data, setData] = useState<Experience[]>([]);

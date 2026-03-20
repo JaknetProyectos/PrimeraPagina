@@ -4,7 +4,7 @@ import { supabase } from "@/supabase/client";
 
 
 export async function middleware(req: NextRequest) {
-  let res = NextResponse.next();
+  const res = NextResponse.next();
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

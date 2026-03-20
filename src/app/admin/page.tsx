@@ -11,7 +11,7 @@ import {
   TrendingUp,
   ArrowRight
 } from "lucide-react";
-import { type Reservation } from "@/lib/reservations";
+import { Reservation } from "@/interfaces/Reservations";
 import { useReservations } from "@/hooks/useReservations";
 
 export default function AdminDashboard() {

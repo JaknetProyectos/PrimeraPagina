@@ -103,7 +103,7 @@ export default function ExperienceDetailPage() {
 
                             {/* Thumbnails */}
                             <div className="flex gap-2 mt-3">
-                                {images.map((img, i) => (
+                                {images.map((img: any, i: number) => (
                                     <img
                                         key={i}
                                         src={img}

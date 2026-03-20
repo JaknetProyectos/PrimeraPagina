@@ -7,6 +7,7 @@ import { MapPin, ArrowRight, Search, ChevronLeft, ChevronRight } from "lucide-re
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { supabase } from "@/supabase/client";
+import { Destination } from "@/interfaces/Destination";
 
 // Constante para definir cuántos elementos ver por página
 const ITEMS_PER_PAGE = 6;
@@ -35,7 +36,7 @@ export default function DestinationsPage() {
   const filteredDestinations = useMemo(() => {
     return destinations.filter((dest) =>
       dest.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      dest.shortDescription.toLowerCase().includes(searchTerm.toLowerCase())
+      dest.short_description.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [destinations, searchTerm]);
 
@@ -82,8 +83,8 @@ export default function DestinationsPage() {
                 <div
                   className="h-48 bg-cover bg-center relative"
                   style={{
-                    backgroundColor: dest.bgColor,
-                    backgroundImage: `url(${dest.cardImage})`
+                    backgroundColor: dest.bg_color,
+                    backgroundImage: `url(${dest.card_image})`
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -99,7 +100,7 @@ export default function DestinationsPage() {
                 {/* Contenido */}
                 <div className="p-4">
                   <p className="text-muted-foreground text-sm line-clamp-2">
-                    {dest.shortDescription}
+                    {dest.short_description}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {dest.highlights.slice(0, 3).map((h) => (

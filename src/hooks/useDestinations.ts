@@ -22,20 +22,7 @@ export function useDestinations() {
 
         if (error) throw error;
 
-        // 👇 opcional: mapear snake_case → camelCase
-        const mapped = (data || []).map((d) => ({
-          id: d.id,
-          slug: d.slug,
-          name: d.name,
-          shortDescription: d.short_description,
-          description: d.description,
-          heroImage: d.hero_image,
-          cardImage: d.card_image,
-          highlights: d.highlights,
-          bgColor: d.bg_color,
-        }));
-
-        setData(mapped);
+        setData(data);
       } catch (err) {
         setError(err as Error);
       } finally {

@@ -1,6 +1,6 @@
 import { supabase } from "@/supabase/client";
 import { useState, useEffect } from "react";
-import { Experience } from "./useExperiences";
+import { Experience } from "@/interfaces/Experiences";
 
 export function useExperience(id: string) {
     const [data, setData] = useState<Experience | null>(null);

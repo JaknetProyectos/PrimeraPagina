@@ -33,13 +33,14 @@ export default function HeroSection() {
               Experiencias únicas que combinan aventura, historia, naturaleza y gastronomía.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="/experiencias" className="md-btn md-btn-secondary inline-flex items-center gap-2">
+              <Link href="/experiencias" className="md-btn md-btn-secondary inline-flex items-center gap-2">
                 Ver experiencias
                 <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#contactanos" className="md-btn bg-white/20 text-white hover:bg-white/30">
+              </Link>
+
+              <Link href="#contactanos" className="md-btn bg-white/20 text-white hover:bg-white/30">
                 Contactar
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -66,7 +67,7 @@ export default function HeroSection() {
               <DestinationCardSkeleton />
             </>
           ) : (
-            destinations.slice(0,3).map((dest) => (
+            destinations.slice(0, 3).map((dest) => (
               <Link
                 key={dest.id}
                 href={`/destinos/${dest.slug}`}
@@ -75,8 +76,8 @@ export default function HeroSection() {
                 <div
                   className="h-48 bg-cover bg-center relative"
                   style={{
-                    backgroundColor: dest.bgColor,
-                    backgroundImage: `url(${dest.cardImage})`
+                    backgroundColor: dest.bg_color,
+                    backgroundImage: `url(${dest.card_image})`
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -90,7 +91,7 @@ export default function HeroSection() {
                 </div>
                 <div className="p-4">
                   <p className="text-[var(--md-on-surface-medium)] text-sm line-clamp-2">
-                    {dest.shortDescription}
+                    {dest.short_description}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {dest.highlights.slice(0, 3).map((h) => (

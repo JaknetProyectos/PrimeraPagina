@@ -209,11 +209,11 @@ export default function DestinationPage() {
       {/* Hero */}
       <div
         className="h-72 md:h-96 relative"
-        style={{ backgroundColor: destination.bgColor }}
+        style={{ backgroundColor: destination.bg_color }}
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${destination.heroImage})` }}
+          style={{ backgroundImage: `url(${destination.hero_image})` }}
         />
         <div className="absolute inset-0 bg-black/40" />
 
@@ -236,7 +236,7 @@ export default function DestinationPage() {
         <div className="max-w-2xl mb-12">
           <p className="text-lg text-[var(--md-on-surface-medium)]">{destination.description}</p>
           <div className="flex flex-wrap gap-2 mt-4">
-            {destination.highlights.map((h) => (
+            {destination.highlights.map((h: any) => (
               <span key={h} className="px-3 py-1 bg-[var(--md-primary)]/10 text-[var(--md-primary)] rounded-full text-sm">
                 {h}
               </span>

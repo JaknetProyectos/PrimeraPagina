@@ -147,7 +147,7 @@ export default function Page() {
                                     (d) => d.slug === e.target.value
                                 );
 
-                                setForm({
+                                selected && setForm({
                                     ...form,
                                     destination_slug: selected.slug,
                                     destination_name: selected.name,
