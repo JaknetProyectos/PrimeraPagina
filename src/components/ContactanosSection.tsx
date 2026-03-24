@@ -118,7 +118,7 @@ export default function ContactanosSection() {
               <div className="flex flex-col items-center">
                 <Mail className="w-8 h-8 mb-3" />
                 <h4 className="font-semibold mb-1">MAIL</h4>
-                <p className="text-white/80 text-sm">support@adventuretrip.com.mx</p>
+                <p className="text-white/80 text-sm">support@vivatrip.com.mx</p>
               </div>
               <div className="flex flex-col items-center">
                 <MapPin className="w-8 h-8 mb-3" />

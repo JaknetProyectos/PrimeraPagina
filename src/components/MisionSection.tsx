@@ -12,7 +12,7 @@ export default function MisionSection() {
 
       <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-[60vh] text-center">
         {/* Mission Title with Gradient */}
-        <h2 className="font-anton text-7xl md:text-9xl lg:text-[12rem] text-gradient-mission opacity-80 mb-8">
+        <h2 className="font-anton text-7xl text-white md:text-9xl lg:text-[12rem] text-gradient-mission opacity-80 mb-8">
           MISIÓN
         </h2>
 

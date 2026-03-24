@@ -8,10 +8,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-[var(--md-primary)] rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <span className="font-medium text-lg">Adventure Trip</span>
+              <span className="font-medium text-lg">Viva Trip</span>
             </div>
             <p className="text-gray-400 text-sm">
               Experiencias únicas que combinan aventura, historia y cultura en México.
@@ -49,7 +46,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
-            © 2024 Adventure Trip. Todos los derechos reservados.
+            © 2026 Viva Trip. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-4 text-sm text-gray-500">
             <span>Hecho con cariño en México</span>

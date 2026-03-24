@@ -7,7 +7,7 @@ NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321 # cambiamos el puerto por el KON
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5c
 
 # Create supabase, cambiar el nombre del proyecto
-PROJECT_NAME=adventure_trip
+PROJECT_NAME=viva_trip
 
 # Cambiar puertos para evitar conflictos
 POSTGRES_PORT=54332

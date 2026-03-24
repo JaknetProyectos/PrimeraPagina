@@ -300,8 +300,8 @@ export default function DestinationPage() {
       {/* Footer */}
       <footer className="bg-[#212121] text-white py-8">
         <div className="container mx-auto px-4 text-center">
-          <Link href="/" className="text-[var(--md-primary)] font-medium">Adventure Trip</Link>
-          <p className="text-gray-500 text-sm mt-2">© 2024 Todos los derechos reservados</p>
+          <Link href="/" className="text-[var(--md-primary)] font-medium">Viva Trip</Link>
+          <p className="text-gray-500 text-sm mt-2">© 2026 Todos los derechos reservados</p>
         </div>
       </footer>
 

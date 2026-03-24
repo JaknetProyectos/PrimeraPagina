@@ -22,10 +22,10 @@ export default function ConocenosSection() {
           <div className="lg:w-1/2 text-white">
             <p className="text-[#e8e0c6] font-abel text-xl mb-2 italic">Conócenos</p>
             <h2 className="font-anton text-5xl lg:text-6xl text-[#e8e0c6] mb-6">
-              Adventure Trip
+              VivaTrip
             </h2>
             <p className="text-white/90 text-lg leading-relaxed mb-8">
-              En <span className="font-semibold text-[#e8e0c6]">Adventure Trip</span> creemos que viajar es mucho más que moverse de un lugar a otro: es vivir experiencias que despiertan los sentidos, conectan con la cultura y dejan recuerdos inolvidables.
+              En <span className="font-semibold text-[#e8e0c6]">VivaTrip</span> creemos que viajar es mucho más que moverse de un lugar a otro: es vivir experiencias que despiertan los sentidos, conectan con la cultura y dejan recuerdos inolvidables.
             </p>
 
             <div className="flex items-start gap-3">

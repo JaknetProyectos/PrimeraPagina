@@ -4,8 +4,8 @@ import ClientBody from "./ClientBody";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Adventure Trip - Visita México",
-  description: "En Adventure Trip creemos que viajar es mucho más que moverse de un lugar a otro: es vivir experiencias que despiertan los sentidos, conectan con la cultura y dejan recuerdos inolvidables.",
+  title: "VivaTrip - Visita México",
+  description: "En VivaTrip creemos que viajar es mucho más que moverse de un lugar a otro: es vivir experiencias que despiertan los sentidos, conectan con la cultura y dejan recuerdos inolvidables.",
 };
 
 export default function RootLayout({

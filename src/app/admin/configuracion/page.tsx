@@ -6,8 +6,8 @@ import { Save, RefreshCw, Trash2 } from "lucide-react";
 export default function ConfiguracionPage() {
   const [saved, setSaved] = useState(false);
   const [settings, setSettings] = useState({
-    siteName: "Adventure Trip",
-    email: "support@adventuretrip.com.mx",
+    siteName: "Viva Trip",
+    email: "support@vivatrip.com.mx",
     phone: "+52 55 1234 1234",
     address: "Av. México, Ciudad de México",
     currency: "MXN",
@@ -22,7 +22,7 @@ export default function ConfiguracionPage() {
 
   const handleClearReservations = () => {
     if (confirm("¿Estás seguro de eliminar TODAS las reservaciones? Esta acción no se puede deshacer.")) {
-      localStorage.removeItem("adventure_trip_reservations");
+      localStorage.removeItem("viva_trip_reservations");
       alert("Todas las reservaciones han sido eliminadas.");
       window.location.reload();
     }
@@ -30,7 +30,7 @@ export default function ConfiguracionPage() {
 
   const handleResetDemo = () => {
     if (confirm("¿Quieres restaurar los datos de demostración?")) {
-      localStorage.removeItem("adventure_trip_reservations");
+      localStorage.removeItem("viva_trip_reservations");
       window.location.reload();
     }
   };

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, ShoppingBag, Settings } from "lucide-react";
+import Image from "next/image";
 
 const navItems = [
   { href: "/experiencias", label: "Experiencias" },
@@ -19,12 +20,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-[var(--md-primary)] rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">A</span>
-            </div>
-            <span className="font-medium text-[var(--md-on-surface)] text-lg hidden sm:block">
-              Adventure Trip
-            </span>
+            <Image
+              src="/logo.png"
+              alt="VivaTrip Logo"
+              width={150}
+              height={50}
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
