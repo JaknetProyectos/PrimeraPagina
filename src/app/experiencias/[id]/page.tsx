@@ -8,10 +8,12 @@ import Footer from "@/components/Footer";
 import { saveReservation } from "@/lib/reservations";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { sendConfirmationEmail } from "@/lib/email";
+import { useCart } from "@/context/cartContext";
 
 export default function ExperienceDetailPage() {
     const params = useParams();
     const id = params.id as string;
+    const { addToCart } = useCart();
 
     const { data, loading, error } = useExperience(id);
 
@@ -154,6 +156,21 @@ export default function ExperienceDetailPage() {
                                     Reservar ahora
                                 </button>
 
+                                <button
+                                    onClick={() =>
+                                        addToCart({
+                                            experienceId: data.id,
+                                            title: data.title,
+                                            destinationName: data.destinationName ?? "",
+                                            price: data.price,
+                                            personas: 1,
+                                        })
+                                    }
+                                    className="w-full bg-blue-600 mt-5 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                                >
+                                    Agregar al carrito
+                                </button>
+
                                 {/* Confianza tipo e-commerce */}
                                 <div className="mt-4 space-y-2 text-sm text-gray-500">
                                     <p>✔ Confirmación rápida</p>
@@ -291,6 +308,8 @@ export default function ExperienceDetailPage() {
                             <button className="w-full bg-[#ae4e68] text-white py-2 rounded">
                                 Confirmar reservación
                             </button>
+
+
                         </form>
                     </div>
                 </div>

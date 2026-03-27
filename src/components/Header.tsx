@@ -2,17 +2,23 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, ShoppingBag, Settings } from "lucide-react";
+import { Menu, X, ShoppingBag, Settings, ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import { useCart } from "@/context/cartContext";
 
 const navItems = [
+  { href: "/", label: "Conócenos" },
+  { href: "/pasion", label: "Pasión futbolera" },
+  { href: "/armatuaventura", label: "Arma tu aventura" },
   { href: "/experiencias", label: "Experiencias" },
-  { href: "/destinos", label: "Destinos" },
-  { href: "/#contactanos", label: "Contacto" },
 ];
+
+
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cart } = useCart()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white elevation-2">
@@ -44,13 +50,17 @@ export default function Header() {
 
           {/* Right side */}
           <div className="flex items-center gap-2">
-            {/* Admin Link */}
             <Link
-              href="/admin"
-              className="p-2 text-[var(--md-on-surface-medium)] hover:text-[var(--md-primary)] hover:bg-[var(--md-primary)]/5 rounded-full transition-colors"
-              title="Admin"
+              href="/cart"
+              className="relative p-2 rounded-full hover:bg-gray-100 transition"
             >
-              <Settings className="w-5 h-5" />
+              <ShoppingCart className="w-6 h-6" />
+
+              {cart.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                  {cart.length}
+                </span>
+              )}
             </Link>
 
             {/* Mobile Menu Button */}

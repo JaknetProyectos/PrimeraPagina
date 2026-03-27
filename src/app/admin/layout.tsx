@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/supabase/client";
+import Loading from "@/components/Loading"
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -66,9 +67,7 @@ export default function AdminLayout({
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        <div className="animate-spin h-8 w-8 border-b-2 border-[#ae4e68]" />
-      </div>
+      <Loading/>
     );
   }
 

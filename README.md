@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+Ver ahora si lo del correo,
+Colocar los datos originales de contacto del sitio original
+Copiar los legales de la original cambiando el nombre de la empresa
+Variar un poco las imágenes
+Asuntos de los correos variados pero siguen siendo lo mismo
+lo que quieren es replicar las cosas pero en otro lado

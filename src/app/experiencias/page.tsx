@@ -21,7 +21,7 @@ export default function ExperiencesPage() {
         hasPrevPage,
     } = useExperiences({
         page,
-        pageSize: 6,
+        pageSize: 9,
     });
 
     if (loading) {
@@ -42,8 +42,8 @@ export default function ExperiencesPage() {
             <section className="min-h-screen bg-background pt-10">
                 <div className="container mx-auto px-4 py-12">
                     {/* Título */}
-                    <h1 className="text-3xl font-bold mb-8 capitalize">
-                        Experiencias
+                    <h1 className="text-5xl text-center font-bold mb-8 capitalize">
+                        Aventuras
                     </h1>
 
                     {/* Grid */}

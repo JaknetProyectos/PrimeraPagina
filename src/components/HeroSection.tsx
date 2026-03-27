@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useDestinations } from "@/hooks/useDestinations";
 import { MapPin, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import logo from "@/public/logo2.png"
 
 function DestinationCardSkeleton() {
   return (
@@ -20,97 +22,98 @@ function DestinationCardSkeleton() {
 export default function HeroSection() {
   const { data: destinations, loading } = useDestinations();
 
+
+
   return (
-    <section className="bg-[var(--md-background)]">
-      {/* Hero Banner */}
-      <div className="bg-[var(--md-primary)] p-6 text-white">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light mb-4">
-              Descubre <span className="font-medium">México</span>
-            </h1>
-            <p className="text-lg md:text-xl opacity-90 mb-8 font-light">
-              Experiencias únicas que combinan aventura, historia, naturaleza y gastronomía.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/experiencias" className="md-btn md-btn-secondary inline-flex items-center gap-2">
-                Ver experiencias
+    <section
+      className="relative bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('https://ext.same-assets.com/619569696/3681039266.jpeg')",
+      }}
+    >
+      {/* OVERLAY (oscurece el fondo, no el contenido) */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* CONTENIDO */}
+      <div className="relative z-10 text-white">
+        <div className="container mx-auto px-6 py-16 md:py-24 space-y-16">
+
+          {/* TOP 3 COLUMNAS */}
+          <div className="grid md:grid-cols-3 items-center gap-8">
+
+            {/* LEFT */}
+            <div className="text-center flex flex-col px-7 md:text-left space-y-4">
+              <h1 className="text-2xl md:text-4xl font-light">
+                Visita México
+              </h1>
+              <p className="text-base opacity-90 leading-relaxed max-w-md mx-auto md:mx-0">
+                Inspira a cada viajero a descubrir la magia de México con seguridad,
+                comodidad y un toque de aventura.
+              </p>
+            </div>
+
+            {/* CENTER */}
+            <div className="flex justify-center">
+              <Image
+                src={logo}
+                width={400}
+                height={400}
+                alt="Logo"
+                className="object-contain"
+              />
+            </div>
+
+            {/* RIGHT */}
+            <div className="flex flex-col px-7 items-center gap-5 justify-center md:justify-end">
+              <h1 className="text-2xl md:text-4xl font-light">
+                Visita nuestra
+              </h1>
+              <Link
+                href="/experiencias"
+                className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition"
+              >
+                Tienda
                 <ArrowRight className="w-4 h-4" />
               </Link>
-
-              <Link href="#contactanos" className="md-btn bg-white/20 text-white hover:bg-white/30">
-                Contactar
-              </Link>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Destinations Grid */}
-      <div id="destinos" className="container mx-auto px-4 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h2 className="text-2xl font-medium text-[var(--md-on-surface)]">
-              Destinos populares
-            </h2>
-            <p className="text-[var(--md-on-surface-medium)] mt-1">
-              Explora nuestros destinos más solicitados
-            </p>
           </div>
-        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {loading ? (
-            <>
-              <DestinationCardSkeleton />
-              <DestinationCardSkeleton />
-              <DestinationCardSkeleton />
-            </>
-          ) : (
-            destinations.slice(0, 3).map((dest) => (
-              <Link
-                key={dest.id}
-                href={`/destinos/${dest.slug}`}
-                className="md-card group transition-all duration-300 hover:-translate-y-1"
-              >
-                <div
-                  className="h-48 bg-cover bg-center relative"
-                  style={{
-                    backgroundColor: dest.bg_color,
-                    backgroundImage: `url(${dest.card_image})`
-                  }}
+          {/* DESTINOS */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {loading ? (
+              <>
+                <DestinationCardSkeleton />
+                <DestinationCardSkeleton />
+                <DestinationCardSkeleton />
+                <DestinationCardSkeleton />
+              </>
+            ) : (
+              destinations.slice(0, 4).map((dest) => (
+                <Link
+                  key={dest.id}
+                  href={`/destinos/${dest.slug}`}
+                  className="group transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center gap-1 text-white/80 text-sm mb-1">
-                      <MapPin className="w-4 h-4" />
-                      <span>México</span>
+                  <div
+                    className="h-48 rounded-xl bg-cover bg-center relative overflow-hidden"
+                    style={{
+                      backgroundImage: `url(${dest.card_image})`,
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition" />
+
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <h3 className="text-white text-lg md:text-xl font-medium text-center px-2">
+                        {dest.name}
+                      </h3>
                     </div>
-                    <h3 className="text-white text-xl font-medium">{dest.name}</h3>
                   </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-[var(--md-on-surface-medium)] text-sm line-clamp-2">
-                    {dest.short_description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-3">
-                    {dest.highlights.slice(0, 3).map((h) => (
-                      <span
-                        key={h}
-                        className="text-xs px-2 py-1 bg-gray-100 text-[var(--md-on-surface-medium)] rounded"
-                      >
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex items-center text-[var(--md-primary)] font-medium text-sm group-hover:gap-2 transition-all">
-                    <span>Ver experiencias</span>
-                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </div>
-              </Link>
-            ))
-          )}
+                </Link>
+              ))
+            )}
+          </div>
+
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ClientBody from "./ClientBody";
 import Script from "next/script";
+import { CartProvider } from "@/context/cartContext";
 
 export const metadata: Metadata = {
   title: "VivaTrip - Visita México",
@@ -25,9 +26,11 @@ export default function RootLayout({
           src="//unpkg.com/same-runtime/dist/index.global.js"
         />
       </head>
-      <body suppressHydrationWarning className="antialiased font-work-sans">
-        <ClientBody>{children}</ClientBody>
-      </body>
+      <CartProvider>
+        <body suppressHydrationWarning className="antialiased font-work-sans">
+          <ClientBody>{children}</ClientBody>
+        </body>
+      </CartProvider>
     </html>
   );
 }
