@@ -73,7 +73,7 @@ export default function ExperienceDetailPage() {
                 price: total,
             });
 
-            await sendConfirmationEmail(form);
+            await sendConfirmationEmail(reservation);
 
             setReservationData(reservation);
             setBookingOpen(false);

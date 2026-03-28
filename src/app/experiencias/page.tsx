@@ -21,7 +21,7 @@ export default function ExperiencesPage() {
         hasPrevPage,
     } = useExperiences({
         page,
-        pageSize: 9,
+        pageSize: 12,
     });
 
     if (loading) {
