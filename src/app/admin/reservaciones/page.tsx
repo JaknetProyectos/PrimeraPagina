@@ -19,6 +19,7 @@ import {
   updateReservationStatus,
   deleteReservation,
 } from "@/lib/reservations";
+import Loading from "@/components/Loading";
 
 export default function ReservacionesPage() {
   const { data: reservations, loading, refetch } = useReservations();
@@ -97,9 +98,7 @@ export default function ReservacionesPage() {
   // ⏳ Loading
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin h-8 w-8 border-b-2 border-[#ae4e68]" />
-      </div>
+      <Loading/>
     );
   }
 
@@ -107,7 +106,6 @@ export default function ReservacionesPage() {
     <div className="space-y-6 pb-10">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Reservaciones</h2>
         <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">
           {filteredReservations.length} resultados
         </span>

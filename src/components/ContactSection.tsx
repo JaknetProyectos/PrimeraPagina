@@ -55,7 +55,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h3 className="font-medium text-[var(--md-on-surface)]">Email</h3>
-                  <p className="text-[var(--md-on-surface-medium)] mt-1">hola@vivatrip.com.mx</p>
+                  <p className="text-[var(--md-on-surface-medium)] mt-1">contacto@vivatrip.com.mx</p>
                   <p className="text-sm text-[var(--md-on-surface-disabled)]">Respondemos en 24 horas</p>
                 </div>
               </div>

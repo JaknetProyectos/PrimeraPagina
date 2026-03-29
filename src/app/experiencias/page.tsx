@@ -6,6 +6,7 @@ import { useExperiences } from "@/hooks/useExperiences";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import Loading from "@/components/Loading";
 
 export default function ExperiencesPage() {
     const params = useParams();
@@ -25,7 +26,7 @@ export default function ExperiencesPage() {
     });
 
     if (loading) {
-        return <div className="p-10 text-center">Cargando experiencias...</div>;
+        return <Loading/>
     }
 
     if (error) {
@@ -70,12 +71,15 @@ export default function ExperiencesPage() {
 
                                     <div className="flex justify-between items-center mt-3 text-sm">
                                         <span>{exp.duration}</span>
-                                        <span className="font-semibold">
-                                            {exp.priceFormatted}
-                                        </span>
+                                        <div className="flex gap-4 justify-between ">
+                                            <span className="font-semibold">
+                                                {exp.priceFormatted}
+                                            </span>
+                                            <p>(IVA incluido)</p>
+                                        </div>
                                     </div>
 
-                                   
+
                                 </div>
                             </Link>
                         ))}
@@ -94,7 +98,8 @@ export default function ExperiencesPage() {
                             disabled={!hasPrevPage}
                             onClick={() => {
                                 window.scrollTo({ top: 0, behavior: "smooth" });
-                                setPage((prev) => Math.max(prev - 1, 1))}
+                                setPage((prev) => Math.max(prev - 1, 1))
+                            }
                             }
                             className="px-4 py-2 border rounded disabled:opacity-50 hover:bg-gray-100"
                         >

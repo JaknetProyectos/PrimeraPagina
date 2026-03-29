@@ -9,6 +9,7 @@ import { saveReservation } from "@/lib/reservations";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { sendConfirmationEmail } from "@/lib/email";
 import { useCart } from "@/context/cartContext";
+import Loading from "@/components/Loading";
 
 export default function ExperienceDetailPage() {
     const params = useParams();
@@ -33,7 +34,7 @@ export default function ExperienceDetailPage() {
     const [reservationData, setReservationData] = useState<any>(null);
 
     if (loading) {
-        return <div className="p-10 text-center">Cargando experiencia...</div>;
+        return <Loading/>;
     }
 
     if (error || !data) {
@@ -44,7 +45,7 @@ export default function ExperienceDetailPage() {
         );
     }
 
-    const priceNumber = Number(data.priceFormatted.replace(/[^0-9]/g, ""));
+    const priceNumber = Number(data.price);
     const total = priceNumber * Number(form.personas || 1);
 
 
@@ -143,6 +144,9 @@ export default function ExperienceDetailPage() {
 
                                 <div className="text-3xl font-bold text-black mb-1">
                                     {data.priceFormatted}
+                                    <div className="text-sm text-gray-500 mb-4">
+                                        (IVA 16%) incluido
+                                    </div>
                                 </div>
 
                                 <div className="text-sm text-gray-500 mb-4">
@@ -183,13 +187,32 @@ export default function ExperienceDetailPage() {
                     </div>
 
                     {/* 🔽 SECCIÓN EXTRA (debajo) */}
-                    <div className="mt-16 max-w-3xl">
+                    <div className="mt-16 w-full">
                         <h2 className="text-xl font-semibold mb-4">
                             Detalles de la experiencia
                         </h2>
 
                         <p className="text-gray-600 leading-relaxed">
                             {data.description}
+                        </p>
+
+                        <hr className="mt-3 mb-3" />
+
+                        <p className="text-gray-600 text-justify leading-relaxed">
+                            Todos nuestros servicios de experiencias están sujetos a confirmación previa de disponibilidad por parte de nuestro equipo. La confirmación se realizará una vez verificados los espacios disponibles para la fecha seleccionada por el cliente. <br />
+                        </p>
+
+                        <p className="text-gray-600 text-justify leading-relaxed">
+                            En caso de que el cupo se encuentre lleno o no sea posible ofrecer el servicio en la fecha solicitada, se notificará oportunamente al cliente para que pueda: <br />
+
+                            a) Elegir una nueva fecha disponible; o bien, <br />
+                            b) Seleccionar otra experiencia equivalente en la misma zona o de características similares a la previamente contratada.
+                        </p>
+
+                        <hr className="mt-3 mb-3" />
+
+                        <p className="text-justify">
+                            En cumplimiento con la Ley Federal de Protección al Consumidor, el cliente tiene derecho a ser informado con claridad sobre las condiciones, fechas y características del servicio antes de su realización. Asimismo, cualquier cambio o reprogramación se llevará a cabo con previo consentimiento del cliente.
                         </p>
                     </div>
 
@@ -297,7 +320,7 @@ export default function ExperienceDetailPage() {
                             />
 
                             <div className="bg-gray-100 p-3 rounded text-sm">
-                                <div>Precio por persona: {data.priceFormatted}</div>
+                                <div>Precio por persona: $ {data.price}</div>
                                 <div>Personas: {form.personas}</div>
 
                                 <div className="font-bold text-lg mt-2">

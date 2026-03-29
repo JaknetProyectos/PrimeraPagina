@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Reservation } from "@/interfaces/Reservations";
 import { useReservations } from "@/hooks/useReservations";
+import Loading from "@/components/Loading";
 
 export default function AdminDashboard() {
   const { data: reservations, loading } = useReservations();
@@ -51,9 +52,7 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ae4e68]" />
-      </div>
+      <Loading/>
     );
   }
 
@@ -159,35 +158,7 @@ export default function AdminDashboard() {
         )}
       </div>
 
-      {/* Quick Stats by Destination */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {["Querétaro", "Xochimilco", "Oaxaca"].map((dest) => {
-          const destReservations = reservations.filter((r) => r.destinationName === dest);
-          return (
-            <div key={dest} className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="font-semibold text-gray-900 mb-4">{dest}</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Total reservaciones</span>
-                  <span className="font-medium">{destReservations.length}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Pendientes</span>
-                  <span className="font-medium text-yellow-600">
-                    {destReservations.filter((r) => r.status === "pending").length}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Confirmadas</span>
-                  <span className="font-medium text-green-600">
-                    {destReservations.filter((r) => r.status === "confirmed").length}
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      
     </div>
   );
 }

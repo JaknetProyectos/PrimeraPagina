@@ -60,8 +60,8 @@ export default function CartPage() {
         <>
             <Header />
             {ticket && (
-                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-                    <div className="bg-white w-full max-w-lg rounded-2xl p-6 shadow-xl">
+                <div className="fixed inset-0 bg-blue-500 flex items-center justify-center z-50">
+                    <div className="bg-white w-full max-w-lg rounded-lg p-6 shadow-xl">
 
                         <h2 className="text-xl font-semibold mb-4">
                             Confirmación de reserva
@@ -87,7 +87,7 @@ export default function CartPage() {
 
                         <button
                             onClick={() => setTicket(null)}
-                            className="mt-6 w-full border border-black py-2 rounded-lg hover:bg-black hover:text-white transition"
+                            className="mt-6 w-full py-2 rounded-lg bg-blue-600 text-white transition"
                         >
                             Cerrar
                         </button>
@@ -189,7 +189,7 @@ export default function CartPage() {
                 <button
                     onClick={handleCheckout}
                     disabled={loading}
-                    className="mt-6 w-full bg-black text-white py-3 rounded-xl text-lg 
+                    className="mt-6 w-full bg-blue-500 text-white py-3 rounded-lg text-lg 
              hover:opacity-90 disabled:opacity-50"
                 >
                     {loading ? "Procesando..." : "Confirmar reserva"}

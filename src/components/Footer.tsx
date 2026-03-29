@@ -1,4 +1,8 @@
 import Link from "next/link";
+import visa from "@/public/visa.png"
+import mastercard from "@/public/mastercard.png"
+import Image from "next/image";
+
 
 export default function Footer() {
   return (
@@ -17,29 +21,33 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <h4 className="font-medium mb-4">Destinos</h4>
+            <h4 className="font-medium mb-4">Aceptamos</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/destinos/queretaro" className="hover:text-white transition-colors">Querétaro</Link></li>
-              <li><Link href="/destinos/xochimilco" className="hover:text-white transition-colors">Xochimilco</Link></li>
-              <li><Link href="/destinos/oaxaca" className="hover:text-white transition-colors">Oaxaca</Link></li>
+              <li>
+                <Image src={visa} alt="visa" width={60} />
+              </li>
+              <li>
+                <Image src={mastercard} className="mt-3" alt="visa" width={60} />
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-medium mb-4">Empresa</h4>
+            <h4 className="font-medium mb-4">Contacto</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Sobre nosotros</a></li>
-              <li><a href="#contactanos" className="hover:text-white transition-colors">Contacto</a></li>
-              <li><Link href="/admin" className="hover:text-white transition-colors">Administración</Link></li>
+              <li><a href="/#contactanos" className="hover:text-white transition-colors">contacto@vivatrip.com</a></li>
+              <li><a href="/#contactanos" className="hover:text-white transition-colors">+ 52 1 55 1234 1234</a></li>
+              <li><Link href="/#contactanos" className="hover:text-white transition-colors">Av. México</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-medium mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Términos y condiciones</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Política de privacidad</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Política de cancelación</a></li>
+              <li><a href="/legal/terminos" className="hover:text-white transition-colors">Términos y condiciones</a></li>
+              <li><a href="/legal/reembolsos" className="hover:text-white transition-colors">Política de reembolso y cancelarción</a></li>
+              <li><a href="/legal/privacidad" className="hover:text-white transition-colors">Aviso de privacidad</a></li>
+              <li><a href="/legal/consumidor" className="hover:text-white transition-colors">Ley Federal de Protección al Consumidor</a></li>
             </ul>
           </div>
         </div>

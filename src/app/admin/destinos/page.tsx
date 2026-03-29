@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/supabase/client";
 import { Plus, Pencil, Trash2, X } from "lucide-react";
+import Loading from "@/components/Loading";
 
 interface Destination {
   id: string;
@@ -77,13 +78,12 @@ export default function DestinosAdminPage() {
     setOpen(true);
   };
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <Loading/>
 
   return (
     <div className="space-y-6">
       {/* HEADER */}
       <div className="flex justify-between">
-        <h1 className="text-2xl font-bold">Destinos</h1>
         <button
           onClick={() => setOpen(true)}
           className="bg-[#ae4e68] text-white px-4 py-2 rounded flex gap-2"

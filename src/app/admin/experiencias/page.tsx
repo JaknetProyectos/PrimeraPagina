@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAdminExperiences } from "@/hooks/useAdminExperiences";
 import { useAdminDestinations } from "@/hooks/useAdminDestinations";
 import { Plus, Trash2, Pencil, X } from "lucide-react";
+import Loading from "@/components/Loading";
 
 export default function Page() {
     const { data, loading, create, update, remove } =
@@ -72,14 +73,13 @@ export default function Page() {
         resetForm();
     };
 
-    if (loading) return <div className="p-10">Cargando...</div>;
+    if (loading) return <Loading/>;
 
     return (
         <div className="space-y-6">
 
             {/* HEADER */}
             <div className="flex justify-between">
-                <h2 className="text-2xl font-bold">Experiencias</h2>
 
                 <button
                     onClick={() => setOpen(true)}

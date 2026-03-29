@@ -2,13 +2,15 @@ import { createClient } from "@supabase/supabase-js";
 import { Destination } from "@/interfaces/Destination";
 import { Experience } from "@/interfaces/Experiences";
 import { experiences } from "@/app/data/experiencias";
+import { NextResponse } from "next/server";
+
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export async function GET() {
+export async function POST(req: Request) {
     try {
         const { data: existing, error: selectError } = await supabase
             .from("experiences")
