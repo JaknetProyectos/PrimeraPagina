@@ -11,7 +11,7 @@ export function useExperience(id: string) {
         const fetchExperience = async () => {
             try {
                 const { data, error } = await supabase
-                    .from("experiences")
+                    .from("experiences_vivatrip")
                     .select("*")
                     .eq("id", id)
                     .maybeSingle();

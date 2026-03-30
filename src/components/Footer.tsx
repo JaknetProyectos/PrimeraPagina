@@ -35,8 +35,8 @@ export default function Footer() {
           <div>
             <h4 className="font-medium mb-4">Contacto</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="/#contactanos" className="hover:text-white transition-colors">contacto@vivatrip.com</a></li>
-              <li><a href="/#contactanos" className="hover:text-white transition-colors">+ 52 1 55 1234 1234</a></li>
+              <li><Link href="/#contactanos" className="hover:text-white transition-colors">contacto@vivatrip.com</Link></li>
+              <li><Link href="/#contactanos" className="hover:text-white transition-colors">+ 52 1 55 1234 1234</Link></li>
               <li><Link href="/#contactanos" className="hover:text-white transition-colors">Av. México</Link></li>
             </ul>
           </div>
@@ -44,10 +44,10 @@ export default function Footer() {
           <div>
             <h4 className="font-medium mb-4">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="/legal/terminos" className="hover:text-white transition-colors">Términos y condiciones</a></li>
-              <li><a href="/legal/reembolsos" className="hover:text-white transition-colors">Política de reembolso y cancelarción</a></li>
-              <li><a href="/legal/privacidad" className="hover:text-white transition-colors">Aviso de privacidad</a></li>
-              <li><a href="/legal/consumidor" className="hover:text-white transition-colors">Ley Federal de Protección al Consumidor</a></li>
+              <li><Link href="/legal/terminos" className="hover:text-white transition-colors">Términos y condiciones</Link></li>
+              <li><Link href="/legal/reembolsos" className="hover:text-white transition-colors">Política de reembolso y cancelarción</Link></li>
+              <li><Link href="/legal/privacidad" className="hover:text-white transition-colors">Aviso de privacidad</Link></li>
+              <li><Link href="/legal/consumidor" className="hover:text-white transition-colors">Ley Federal de Protección al Consumidor</Link></li>
             </ul>
           </div>
         </div>

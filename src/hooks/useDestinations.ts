@@ -15,7 +15,7 @@ export function useDestinations() {
     const fetchDestinations = async () => {
       try {
         const { data, error } = await supabase
-          .from("destinations")
+          .from("destinations_vivatrip")
           .select("*");
 
         console.log(data)

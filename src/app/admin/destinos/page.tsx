@@ -29,7 +29,7 @@ export default function DestinosAdminPage() {
 
   // 🔥 LOAD
   const load = async () => {
-    const { data } = await supabase.from("destinations").select("*");
+    const { data } = await supabase.from("destinations_vivatrip").select("*");
     setData(data || []);
     setLoading(false);
   };
@@ -47,11 +47,11 @@ export default function DestinosAdminPage() {
 
     if (editing) {
       await supabase
-        .from("destinations")
+        .from("destinations_vivatrip")
         .update(payload)
         .eq("id", editing.id);
     } else {
-      await supabase.from("destinations").insert({
+      await supabase.from("destinations_vivatrip").insert({
         ...payload,
         id: crypto.randomUUID(),
       });
@@ -67,7 +67,7 @@ export default function DestinosAdminPage() {
   const handleDelete = async (id: string) => {
     if (!confirm("¿Eliminar destino?")) return;
 
-    await supabase.from("destinations").delete().eq("id", id);
+    await supabase.from("destinations_vivatrip").delete().eq("id", id);
     load();
   };
 

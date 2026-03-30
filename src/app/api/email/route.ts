@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     const config = statusConfig[data.status] || statusConfig.pending;
 
     await resend.emails.send({
-      from: "Viva Trip <onboarding@resend.dev>", // Cambia por tu correo verificado
+      from: "Viva Trip <contacto@vivamytrip.com>", // Cambia por tu correo verificado
       to: data.email,
       subject: `${config.title}: ${data.activity_title}`,
       html: `
@@ -115,7 +115,7 @@ export async function POST(req: Request) {
           </table>
 
           <p style="margin-top: 30px; font-size: 13px; color: #666;">
-            Dudas o aclaraciones: <strong>contacto@vivatrip.com</strong>
+            Dudas o aclaraciones: <strong>contacto@vivamytrip.com</strong>
           </p>
         </div>
 

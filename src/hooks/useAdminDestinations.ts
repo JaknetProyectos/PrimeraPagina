@@ -11,7 +11,7 @@ export function useAdminDestinations() {
 
   const fetchDestinations = async () => {
     const { data, error } = await supabase
-      .from("destinations")
+      .from("destinations_vivatrip")
       .select("*")
       .order("name");
 
@@ -20,12 +20,12 @@ export function useAdminDestinations() {
   };
 
   const createDestination = async (destination: Partial<Destination>) => {
-    const { error } = await supabase.from("destinations").insert(destination);
+    const { error } = await supabase.from("destinations_vivatrip").insert(destination);
     if (!error) fetchDestinations();
   };
 
   const deleteDestination = async (id: string) => {
-    await supabase.from("destinations").delete().eq("id", id);
+    await supabase.from("destinations_vivatrip").delete().eq("id", id);
     fetchDestinations();
   };
 

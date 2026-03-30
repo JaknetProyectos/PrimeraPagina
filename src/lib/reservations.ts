@@ -77,7 +77,7 @@ async function triggerEmailNotification(reservationData: any) {
 // /lib/reservations.ts
 export async function saveReservation(reservation: any) {
   const { data, error } = await supabase
-    .from("reservations")
+    .from("reservations_vivatrip")
     .insert({
       activity_title: reservation.activityTitle,
       destination_name: reservation.destinationName,
@@ -103,7 +103,7 @@ export async function saveReservation(reservation: any) {
 
 export async function updateReservationStatus(id: string, status: string) {
   const { data, error } = await supabase
-    .from("reservations")
+    .from("reservations_vivatrip")
     .update({ status })
     .eq("id", id)
     .select() // Traemos los datos actualizados para el email
@@ -120,7 +120,7 @@ export async function updateReservationStatus(id: string, status: string) {
 export async function deleteReservation(id: string) {
   // 1. Primero obtenemos los datos para poder avisar por email antes de borrar
   const { data: reservation } = await supabase
-    .from("reservations")
+    .from("reservations_vivatrip")
     .select("*")
     .eq("id", id)
     .single();
@@ -131,5 +131,5 @@ export async function deleteReservation(id: string) {
   }
 
   // 2. Procedemos a borrar
-  return await supabase.from("reservations").delete().eq("id", id);
+  return await supabase.from("reservations_vivatrip").delete().eq("id", id);
 }

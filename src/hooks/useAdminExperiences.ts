@@ -9,7 +9,7 @@ export function useAdminExperiences() {
 
   const fetchData = async () => {
     const { data, error } = await supabase
-      .from("experiences")
+      .from("experiences_vivatrip")
       .select("*")
       .order("title");
 
@@ -18,14 +18,14 @@ export function useAdminExperiences() {
   };
 
   const create = async (exp: any) => {
-    const { error } = await supabase.from("experiences").insert(exp);
+    const { error } = await supabase.from("experiences_vivatrip").insert(exp);
     if (error) throw error;
     fetchData();
   };
 
   const update = async (id: string, exp: any) => {
     const { error } = await supabase
-      .from("experiences")
+      .from("experiences_vivatrip")
       .update(exp)
       .eq("id", id);
 
@@ -35,7 +35,7 @@ export function useAdminExperiences() {
 
   const remove = async (id: string) => {
     const { error } = await supabase
-      .from("experiences")
+      .from("experiences_vivatrip")
       .delete()
       .eq("id", id);
 

@@ -13,7 +13,7 @@ export default function useDestination(slug: string) {
         const fetchDestination = async () => {
             try {
                 const { data, error } = await supabase
-                    .from("destinations")
+                    .from("destinations_vivatrip")
                     .select("*")
                     .eq("slug", slug)
                     .single();

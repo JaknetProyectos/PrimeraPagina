@@ -13,7 +13,7 @@ const supabase = createClient(
 export async function POST(req: Request) {
     try {
         const { data: existing, error: selectError } = await supabase
-            .from("experiences")
+            .from("experiences_vivatrip")
             .select("*");
 
         if (selectError) {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
         if (!existing || existing.length === 0) {
             const { error: insertError } = await supabase
-                .from("experiences")
+                .from("experiences_vivatrip")
                 .insert(experiences);
 
             if (insertError) {

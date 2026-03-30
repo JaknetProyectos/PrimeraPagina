@@ -35,7 +35,7 @@ export function useExperiences(options : UseExperiencesOptions = {}) {
 
       try {
         let query = supabase
-          .from("experiences")
+          .from("experiences_vivatrip")
           .select("*", { count: "exact" });
 
         // filtro

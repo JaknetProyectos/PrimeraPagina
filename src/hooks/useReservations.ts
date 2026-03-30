@@ -24,7 +24,7 @@ export function useReservations() {
     setLoading(true);
 
     const { data, error } = await supabase
-      .from("reservations")
+      .from("reservations_vivatrip")
       .select("*")
       .order("created_at", { ascending: false });
 
