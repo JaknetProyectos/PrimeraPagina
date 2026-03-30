@@ -1,6 +1,7 @@
 import { CartItem } from "@/interfaces/CartItem";
 import { saveReservation } from "./reservations";
 import { sendConfirmationEmail } from "./email";
+import { Reservation } from "@/interfaces/Reservations";
 
 export function getCart(): CartItem[] {
     if (typeof window === "undefined") return [];
@@ -75,12 +76,14 @@ export async function checkout(cart: CartItem[], userData: any) {
         }
     }
 
-    // 💰 pago fake
+    // 💰 Simulación de pago
     await new Promise(res => setTimeout(res, 1500));
 
-    const results = [];
+    const results: Reservation[] = [];
 
+    // Guardamos todas en la DB primero
     for (const item of cart) {
+        console.log({item})
         const reservation = await saveReservation({
             activityTitle: item.title,
             destinationName: item.destinationName,
@@ -91,11 +94,32 @@ export async function checkout(cart: CartItem[], userData: any) {
             telefono: userData.telefono,
             price: item.price,
         });
-
-        await sendConfirmationEmail(reservation)
-
         results.push(reservation);
     }
+
+    // 🎫 Generamos la información del Ticket
+    const subtotal = results.reduce((acc, curr) => acc + Number(curr.price.replace(/[^0-9.-]+/g, "")), 0);
+
+    const checkoutInfo = {
+        orderId: `VMT-${Math.floor(1000 + Math.random() * 9000)}`,
+        orderDate: new Intl.DateTimeFormat('es-MX', { dateStyle: 'long' }).format(new Date()),
+        subtotal: subtotal.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }),
+        metodoPago: "Tarjeta de crédito o débito",
+        billingAddress: {
+            nombre: userData.nombre,
+            calle: userData.direccion || "No especificada",
+            ciudad: userData.ciudad || "Ciudad de México",
+            codigoPostal: userData.cp || "00000",
+            telefono: userData.telefono,
+            email: userData.email
+        }
+    };
+
+    console.log({checkoutInfo})
+    console.log({results})
+
+    // 🔥 ENVIAR UN SOLO EMAIL CON TODO EL ARRAY
+    await sendConfirmationEmail(results, checkoutInfo);
 
     return results;
 }

@@ -1,20 +1,7 @@
+import { Reservation } from "@/interfaces/Reservations";
 import { supabase } from "@/supabase/client";
 import { useEffect, useState } from "react";
 
-export type Reservation = {
-  id: string;
-  activityTitle: string;
-  destinationName: string;
-  fecha: string;
-  personas: number;
-  nombre: string;
-  email: string;
-  telefono: string;
-  price: string;
-  comentarios?: string;
-  status: "pending" | "confirmed" | "completed" | "cancelled";
-  createdAt: string;
-};
 
 export function useReservations() {
   const [data, setData] = useState<Reservation[]>([]);

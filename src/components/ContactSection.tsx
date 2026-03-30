@@ -10,15 +10,33 @@ export default function ContactSection() {
     mensaje: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false); // Estado para el botón
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ nombre: "", email: "", mensaje: "" });
-    }, 3000);
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({ nombre: "", email: "", mensaje: "" });
+        // Opcional: Volver a mostrar el formulario después de 5 segundos
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        alert("Hubo un error al enviar el mensaje. Intenta de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error de conexión.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

@@ -14,7 +14,8 @@ import {
   MapPin,
 } from "lucide-react";
 
-import { useReservations, type Reservation } from "@/hooks/useReservations";
+import { useReservations } from "@/hooks/useReservations";
+import { Reservation } from "@/interfaces/Reservations";
 import {
   updateReservationStatus,
   deleteReservation,
@@ -98,7 +99,7 @@ export default function ReservacionesPage() {
   // ⏳ Loading
   if (loading) {
     return (
-      <Loading/>
+      <Loading />
     );
   }
 

@@ -18,8 +18,10 @@ export default function ExperienceDetailPage() {
 
     const { data, loading, error } = useExperience(id);
 
+
     const [selectedImage, setSelectedImage] = useState(0);
     const [galleryOpen, setGalleryOpen] = useState(false);
+    const [loadingCheckout, setLoading] = useState(false);
 
     const [bookingOpen, setBookingOpen] = useState(false);
     const [form, setForm] = useState({
@@ -34,7 +36,7 @@ export default function ExperienceDetailPage() {
     const [reservationData, setReservationData] = useState<any>(null);
 
     if (loading) {
-        return <Loading/>;
+        return <Loading />;
     }
 
     if (error || !data) {
@@ -65,23 +67,53 @@ export default function ExperienceDetailPage() {
     // 👉 submit reserva
     const handleBooking = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
 
         try {
+            // 1. Guardar en Supabase y obtener el objeto CREADO (con su ID real)
             const reservation = await saveReservation({
                 ...form,
                 activityTitle: data.title,
                 destinationName: data.destinationName,
-                price: total,
+                price: total, // Asegúrate de que sea el string formateado del componente
             });
 
-            await sendConfirmationEmail(reservation);
+            // reservation ya contiene el id real (uuid o serial) de la base de datos
+            const reservationId = reservation.id.toString().toUpperCase();
 
+            // 2. Construir el Ticket con datos reales
+            const checkoutInfo = {
+                // Usamos el ID real de la base de datos para el Ticket
+                orderId: reservationId.includes('-') ? reservationId.split('-')[0] : reservationId,
+                orderDate: new Intl.DateTimeFormat('es-MX', {
+                    dateStyle: 'long',
+                    timeZone: 'America/Mexico_City'
+                }).format(new Date()),
+                subtotal: reservation.price,
+                metodoPago: "Pago con Tarjeta",
+                billingAddress: {
+                    nombre: reservation.nombre,
+                    calle: "Reserva Directa vía Web",
+                    ciudad: "México",
+                    codigoPostal: "CP",
+                    telefono: reservation.telefono,
+                    email: reservation.email
+                }
+            };
+
+            // 3. Enviar email usando el formato de array (aunque sea uno solo)
+            await sendConfirmationEmail([reservation], checkoutInfo);
+
+            // 4. Feedback al usuario
             setReservationData(reservation);
             setBookingOpen(false);
             setSuccessOpen(true);
+
         } catch (err) {
-            console.error(err);
-            alert("Error al guardar la reservación");
+            console.error("Error en reservación:", err);
+            alert("No pudimos procesar tu reserva. Inténtalo de nuevo.");
+        } finally {
+            setLoading(false);
         }
     };
 

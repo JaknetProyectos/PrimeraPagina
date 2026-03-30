@@ -1,4 +1,5 @@
 // /app/api/email/route.ts
+import { Reservation } from "@/interfaces/Reservations";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
@@ -42,7 +43,7 @@ export async function POST(req: Request) {
     const config = statusConfig[data.status] || statusConfig.pending;
 
     await resend.emails.send({
-      from: "Viva Trip <contacto@vivamytrip.com>", // Cambia por tu correo verificado
+      from: "Viva Trip <contacto@vivamytrip.com>",
       to: data.email,
       subject: `${config.title}: ${data.activity_title}`,
       html: `
