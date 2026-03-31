@@ -6,30 +6,41 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { saveReservation } from "@/lib/reservations";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { CheckCircle, ChevronLeft, ChevronRight, CreditCard, Lock, X } from "lucide-react";
 import { sendConfirmationEmail } from "@/lib/email";
 import { useCart } from "@/context/cartContext";
 import Loading from "@/components/Loading";
+import { checkout } from "@/lib/cart";
 
 export default function ExperienceDetailPage() {
     const params = useParams();
     const id = params.id as string;
     const { addToCart } = useCart();
-
     const { data, loading, error } = useExperience(id);
-
 
     const [selectedImage, setSelectedImage] = useState(0);
     const [galleryOpen, setGalleryOpen] = useState(false);
-    const [loadingCheckout, setLoading] = useState(false);
-
+    const [loadingCheckout, setLoadingCheckout] = useState(false);
     const [bookingOpen, setBookingOpen] = useState(false);
+
+
+
     const [form, setForm] = useState({
         fecha: "",
         personas: "1",
         nombre: "",
         email: "",
         telefono: "",
+        direccion: "", // Requerido para Etomin
+        cp: "",        // Requerido para Etomin
+    });
+
+    const [card, setCard] = useState({
+        number: "",
+        name: "",
+        month: "",
+        year: "",
+        cvv: "",
     });
 
     const [successOpen, setSuccessOpen] = useState(false);
@@ -49,8 +60,6 @@ export default function ExperienceDetailPage() {
 
     const priceNumber = Number(data.price);
     const total = priceNumber * Number(form.personas || 1);
-
-
     const images = data.images?.length
         ? data.images
         : [data.image]; // fallback temporal
@@ -67,53 +76,31 @@ export default function ExperienceDetailPage() {
     // 👉 submit reserva
     const handleBooking = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
+        setLoadingCheckout(true);
 
         try {
-            // 1. Guardar en Supabase y obtener el objeto CREADO (con su ID real)
-            const reservation = await saveReservation({
-                ...form,
-                activityTitle: data.title,
-                destinationName: data.destinationName,
-                price: total, // Asegúrate de que sea el string formateado del componente
-            });
+            // Creamos un "item de carrito" temporal para la función checkout
+            const tempCartItem = [{
+                experienceId: data.id,
+                title: data.title,
+                destinationName: data.destinationName ?? "",
+                price: priceNumber,
+                personas: Number(form.personas),
+                fecha: form.fecha
+            }];
 
-            // reservation ya contiene el id real (uuid o serial) de la base de datos
-            const reservationId = reservation.id.toString().toUpperCase();
+            // Usamos la función checkout que ya tiene integrada la lógica de Etomin,
+            // Guardado en DB y Envío de Email de Ticket.
+            const results = await checkout(tempCartItem, form, card);
 
-            // 2. Construir el Ticket con datos reales
-            const checkoutInfo = {
-                // Usamos el ID real de la base de datos para el Ticket
-                orderId: reservationId.includes('-') ? reservationId.split('-')[0] : reservationId,
-                orderDate: new Intl.DateTimeFormat('es-MX', {
-                    dateStyle: 'long',
-                    timeZone: 'America/Mexico_City'
-                }).format(new Date()),
-                subtotal: reservation.price,
-                metodoPago: "Pago con Tarjeta",
-                billingAddress: {
-                    nombre: reservation.nombre,
-                    calle: "Reserva Directa vía Web",
-                    ciudad: "México",
-                    codigoPostal: "CP",
-                    telefono: reservation.telefono,
-                    email: reservation.email
-                }
-            };
-
-            // 3. Enviar email usando el formato de array (aunque sea uno solo)
-            await sendConfirmationEmail([reservation], checkoutInfo);
-
-            // 4. Feedback al usuario
-            setReservationData(reservation);
+            setReservationData(results);
             setBookingOpen(false);
             setSuccessOpen(true);
-
-        } catch (err) {
+        } catch (err: any) {
             console.error("Error en reservación:", err);
-            alert("No pudimos procesar tu reserva. Inténtalo de nuevo.");
+            alert(err.message || "No pudimos procesar tu pago. Inténtalo de nuevo.");
         } finally {
-            setLoading(false);
+            setLoadingCheckout(false);
         }
     };
 
@@ -187,22 +174,20 @@ export default function ExperienceDetailPage() {
 
                                 <button
                                     onClick={() => setBookingOpen(true)}
-                                    className="w-full bg-[#ae4e68] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                                    className="w-full bg-[#ae4e68] text-white mb-4 py-3 rounded-lg font-semibold hover:opacity-90 transition"
                                 >
                                     Reservar ahora
                                 </button>
 
                                 <button
-                                    onClick={() =>
-                                        addToCart({
-                                            experienceId: data.id,
-                                            title: data.title,
-                                            destinationName: data.destinationName ?? "",
-                                            price: data.price,
-                                            personas: 1,
-                                        })
-                                    }
-                                    className="w-full bg-blue-600 mt-5 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                                    onClick={() => addToCart({
+                                        experienceId: data.id,
+                                        title: data.title,
+                                        destinationName: data.destinationName ?? "",
+                                        price: data.price,
+                                        personas: 1,
+                                    })}
+                                    className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
                                 >
                                     Agregar al carrito
                                 </button>
@@ -287,157 +272,80 @@ export default function ExperienceDetailPage() {
 
             {/* 🔥 MODAL RESERVA */}
             {bookingOpen && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl w-full max-w-md p-6 relative">
-                        <button
-                            onClick={() => setBookingOpen(false)}
-                            className="absolute top-4 right-4"
-                        >
-                            <X />
+                <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+                    <div className="bg-white rounded-2xl w-full max-w-lg p-8 relative my-8">
+                        <button onClick={() => setBookingOpen(false)} className="absolute top-5 right-5 text-gray-400 hover:text-black">
+                            <X size={24} />
                         </button>
 
-                        <h3 className="text-xl font-bold mb-4">
-                            Reservar {data.title}
-                        </h3>
+                        <h3 className="text-2xl font-bold mb-6 text-gray-900">Finalizar Reserva</h3>
 
-                        <form onSubmit={handleBooking} className="space-y-3">
-                            <input
-                                type="date"
-                                required
-                                value={form.fecha}
-                                onChange={(e) =>
-                                    setForm({ ...form, fecha: e.target.value })
-                                }
-                                className="w-full border p-2 rounded"
-                            />
-
-                            <input
-                                type="number"
-                                min="1"
-                                value={form.personas}
-                                onChange={(e) =>
-                                    setForm({ ...form, personas: e.target.value })
-                                }
-                                className="w-full border p-2 rounded"
-                            />
-
-                            <input
-                                type="text"
-                                placeholder="Nombre"
-                                required
-                                onChange={(e) =>
-                                    setForm({ ...form, nombre: e.target.value })
-                                }
-                                className="w-full border p-2 rounded"
-                            />
-
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                required
-                                onChange={(e) =>
-                                    setForm({ ...form, email: e.target.value })
-                                }
-                                className="w-full border p-2 rounded"
-                            />
-
-                            <input
-                                type="tel"
-                                placeholder="Teléfono"
-                                required
-                                onChange={(e) =>
-                                    setForm({ ...form, telefono: e.target.value })
-                                }
-                                className="w-full border p-2 rounded"
-                            />
-
-                            <div className="bg-gray-100 p-3 rounded text-sm">
-                                <div>Precio por persona: $ {data.price}</div>
-                                <div>Personas: {form.personas}</div>
-
-                                <div className="font-bold text-lg mt-2">
-                                    Total: ${total}
+                        <form onSubmit={handleBooking} className="space-y-4">
+                            {/* Datos de la Experiencia */}
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold uppercase text-gray-500">Fecha</label>
+                                    <input type="date" required value={form.fecha} onChange={(e) => setForm({ ...form, fecha: e.target.value })} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-[#ae4e68]" />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold uppercase text-gray-500">Personas</label>
+                                    <input type="number" min="1" value={form.personas} onChange={(e) => setForm({ ...form, personas: e.target.value })} className="w-full border p-2.5 rounded-lg focus:ring-2 focus:ring-[#ae4e68]" />
                                 </div>
                             </div>
 
-                            <button className="w-full bg-[#ae4e68] text-white py-2 rounded">
-                                Confirmar reservación
+                            {/* Datos de Contacto */}
+                            <div className="space-y-3">
+                                <input type="text" placeholder="Nombre completo" required value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} className="w-full border p-2.5 rounded-lg" />
+                                <input type="email" placeholder="Email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full border p-2.5 rounded-lg" />
+                                <div className="grid grid-cols-2 gap-3">
+                                    <input type="text" placeholder="Dirección" required value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} className="w-full border p-2.5 rounded-lg" />
+                                    <input type="text" placeholder="C.P." required value={form.cp} onChange={(e) => setForm({ ...form, cp: e.target.value })} className="w-full border p-2.5 rounded-lg" />
+                                </div>
+                            </div>
+
+                            {/* Datos de Tarjeta */}
+                            <div className="bg-gray-50 p-4 rounded-xl space-y-3 border border-gray-100">
+                                <h4 className="text-sm font-bold flex items-center gap-2"><CreditCard size={16} /> Pago Seguro con Etomin</h4>
+                                <input type="text" placeholder="Número de Tarjeta" required maxLength={16} value={card.number} onChange={(e) => setCard({ ...card, number: e.target.value })} className="w-full border p-2.5 rounded-lg bg-white" />
+                                <div className="grid grid-cols-3 gap-2">
+                                    <input type="text" placeholder="MM" required maxLength={2} value={card.month} onChange={(e) => setCard({ ...card, month: e.target.value })} className="border p-2.5 rounded-lg text-center bg-white" />
+                                    <input type="text" placeholder="AA" required maxLength={2} value={card.year} onChange={(e) => setCard({ ...card, year: e.target.value })} className="border p-2.5 rounded-lg text-center bg-white" />
+                                    <input type="password" placeholder="CVV" required maxLength={4} value={card.cvv} onChange={(e) => setCard({ ...card, cvv: e.target.value })} className="border p-2.5 rounded-lg text-center bg-white" />
+                                </div>
+                            </div>
+
+                            <div className="flex justify-between items-center py-2 border-t mt-4">
+                                <span className="text-gray-600">Total a pagar:</span>
+                                <span className="text-xl font-bold text-[#ae4e68]">${total.toLocaleString()} MXN</span>
+                            </div>
+
+                            <button
+                                disabled={loadingCheckout}
+                                className="w-full bg-black text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-800 transition disabled:opacity-50"
+                            >
+                                {loadingCheckout ? "Procesando..." : <><Lock size={18} /> Pagar ahora</>}
                             </button>
-
-
                         </form>
                     </div>
                 </div>
             )}
 
+            {/* MODAL DE ÉXITO (TICKET UNIFICADO) */}
             {successOpen && reservationData && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-
-                    <div className="bg-white rounded-xl max-w-md w-full overflow-hidden shadow-xl">
-
-                        {/* Header tipo ticket */}
-                        <div className="bg-[#ae4e68] text-white p-4">
-                            <h3 className="text-lg font-semibold">🎟 Reservación Confirmada</h3>
-                            <p className="text-sm opacity-80">
-                                Número de orden : {String(reservationData.id).toUpperCase()}
-                            </p>
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-[60] p-4">
+                    <div className="bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
+                        <div className="bg-green-500 text-white p-8 text-center">
+                            <CheckCircle size={60} className="mx-auto mb-4" />
+                            <h3 className="text-2xl font-bold">¡Todo listo!</h3>
+                            <p className="opacity-90">Tu pago ha sido procesado</p>
                         </div>
-
-                        <div className="p-5 space-y-4">
-
-                            {/* Experiencia */}
-                            <div>
-                                <p className="text-sm text-gray-500">Experiencia</p>
-                                <p className="font-medium">{reservationData.activity_title}</p>
-                            </div>
-
-                            {/* Destino */}
-                            <div>
-                                <p className="text-sm text-gray-500">Destino</p>
-                                <p className="font-medium">{reservationData.destination_name}</p>
-                            </div>
-
-                            {/* Fecha */}
-                            <div>
-                                <p className="text-sm text-gray-500">Fecha</p>
-                                <p className="font-medium">{reservationData.fecha}</p>
-                            </div>
-
-                            {/* Personas */}
-                            <div>
-                                <p className="text-sm text-gray-500">Personas</p>
-                                <p className="font-medium">{reservationData.personas}</p>
-                            </div>
-
-                            {/* Precio */}
-                            <div className="border-t pt-3">
-                                <div className="flex justify-between text-sm">
-                                    <span>Precio por persona</span>
-                                    <span>${Math.floor(reservationData.price / reservationData.personas)}</span>
-                                </div>
-
-                                <div className="flex justify-between font-bold text-lg mt-1">
-                                    <span>Total</span>
-                                    <span>${reservationData.price}</span>
-                                </div>
-                            </div>
-
-                            {/* Estado */}
-                            <div className="text-xs text-yellow-600 bg-yellow-100 p-2 rounded text-center">
-                                Estado: Pendiente de confirmación de pago
-                            </div>
-
-                            {/* Email */}
-                            <p className="text-xs text-gray-500 text-center">
-                                📧 Se envió un correo con los detalles
-                            </p>
-
-                            {/* Botón */}
+                        <div className="p-6 space-y-4">
+                            <p className="text-center text-gray-500 text-sm">Se ha enviado un ticket con los detalles a tu correo electrónico.</p>
                             <button
                                 onClick={() => setSuccessOpen(false)}
-                                className="w-full bg-[#ae4e68] text-white py-2 rounded-lg"
+                                className="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-black transition"
                             >
-                                Cerrar
+                                Entendido
                             </button>
                         </div>
                     </div>
