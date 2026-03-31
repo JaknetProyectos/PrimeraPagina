@@ -16,7 +16,7 @@ export default function ExperienciasSection() {
               style={{ backgroundColor: "#4a4a4a" }}
             >
               <img
-                src="https://ext.same-assets.com/619569696/1196337052.png"
+                src="https://plus.unsplash.com/premium_photo-1732738372625-8dc6a664ec78?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Experiencias"
                 className="absolute inset-0 w-full h-full object-cover grayscale"
                 loading="eager"

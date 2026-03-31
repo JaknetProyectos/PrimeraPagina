@@ -11,6 +11,7 @@ import {
   X,
   MapPin,
   TentTree,
+  Coins,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/supabase/client";
@@ -21,7 +22,7 @@ const navItems = [
   { href: "/admin/reservaciones", label: "Reservaciones", icon: Calendar },
   { href: "/admin/configuracion", label: "Configuración", icon: Settings },
   { href: "/admin/destinos", label: "Destinos", icon: MapPin },
-  { href: "/admin/experiencias", label: "Experiencias", icon: TentTree },
+  { href: "/admin/experiencias", label: "Experiencias", icon: TentTree }
 ];
 
 export default function AdminLayout({
@@ -67,13 +68,13 @@ export default function AdminLayout({
 
   if (loading) {
     return (
-      <Loading/>
+      <Loading />
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-      {/* Overlay mobile */}
+      {/* Overlay mobile
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -81,13 +82,11 @@ export default function AdminLayout({
         />
       )}
 
-      {/* SIDEBAR */}
       <aside
         className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[var(--md-primary)] transform transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
           }`}
       >
         <div className="flex flex-col h-full">
-          {/* Logo */}
           <div className="p-6 border-b border-white/10 flex justify-between items-center">
             <Link href="/admin" className="text-white font-semibold">
               Administración
@@ -101,7 +100,6 @@ export default function AdminLayout({
             </button>
           </div>
 
-          {/* NAV */}
           <nav className="flex-1 p-4 space-y-2">
             {navItems.map((item) => {
               const isActive = pathname.startsWith(item.href);
@@ -123,7 +121,6 @@ export default function AdminLayout({
             })}
           </nav>
 
-          {/* FOOTER */}
           <div className="p-4 border-t border-white/10 space-y-2">
             <button
               onClick={handleLogout}
@@ -141,12 +138,12 @@ export default function AdminLayout({
             </Link>
           </div>
         </div>
-      </aside>
+      </aside> */}
 
       {/* MAIN */}
       <div className="flex-1 flex flex-col min-h-screen">
         {/* TOPBAR */}
-        <header className="bg-white shadow-sm h-16 flex items-center justify-between px-4 lg:px-8">
+        {/* <header className="bg-white shadow-sm h-16 flex items-center justify-between px-4 lg:px-8">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -158,13 +155,13 @@ export default function AdminLayout({
             <h1 className="text-xl font-semibold text-gray-800">
               {getTitle()}
             </h1>
-          </div>
+          </div> */}
 
           {/* Usuario */}
-          <div className="text-sm text-gray-500">
+          {/* <div className="text-sm text-gray-500">
             Panel Admin
           </div>
-        </header>
+        </header> */}
 
         {/* CONTENT */}
         <main className="flex-1 p-4 lg:p-8">{children}</main>

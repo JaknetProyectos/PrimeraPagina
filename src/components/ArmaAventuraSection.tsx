@@ -5,7 +5,7 @@ export default function ArmaAventuraSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
         style={{
-          backgroundImage: "url('https://ext.same-assets.com/619569696/3584943617.webp')",
+          backgroundImage: "url('https://plus.unsplash.com/premium_photo-1697729995893-524dc0b91ecb?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
       />
 
@@ -26,7 +26,7 @@ export default function ArmaAventuraSection() {
               style={{ backgroundColor: "#4a4a4a" }}
             >
               <img
-                src="https://ext.same-assets.com/619569696/3686289824.png"
+                src="https://plus.unsplash.com/premium_photo-1679669192872-1733bfda6df2?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Grupo de viajeros"
                 className="absolute inset-0 w-full h-full object-cover grayscale"
                 loading="eager"

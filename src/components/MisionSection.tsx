@@ -5,7 +5,7 @@ export default function MisionSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://ext.same-assets.com/619569696/3681039266.jpeg')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1506261423908-ea2559c1f24c?q=80&w=884&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50" />

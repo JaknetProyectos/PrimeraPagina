@@ -7,6 +7,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useState } from "react";
 import Loading from "@/components/Loading";
+import Image from "next/image";
+import { getOptimizedUrl } from "@/lib/images";
 
 export default function ExperiencesPage() {
     const params = useParams();
@@ -26,7 +28,7 @@ export default function ExperiencesPage() {
     });
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     if (error) {
@@ -40,7 +42,7 @@ export default function ExperiencesPage() {
     return (
         <>
             <Header />
-            <section className="min-h-screen bg-background pt-10">
+            <section className="min-h-screen mx-24 bg-background pt-10">
                 <div className="container mx-auto px-4 py-12">
                     {/* Título */}
                     <h1 className="text-5xl text-center font-bold mb-8 capitalize">
@@ -48,38 +50,47 @@ export default function ExperiencesPage() {
                     </h1>
 
                     {/* Grid */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {data.map((exp) => (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {data.map((exp, index) => (
                             <Link
                                 key={exp.id}
                                 href={`/experiencias/${exp.id}`}
-                                className="border rounded-lg overflow-hidden bg-card hover:shadow-lg transition"
+                                className="group border rounded-lg overflow-hidden bg-white hover:shadow-2xl transition-all duration-300 flex flex-col"
                             >
-                                {/* Imagen */}
-                                <div
-                                    className="h-48 bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${exp.image})` }}
-                                />
+                                {/* Contenedor de Imagen Optimizado */}
+                                <div className="relative h-60 w-full overflow-hidden bg-gray-200">
+                                    <Image
+                                        src={getOptimizedUrl(exp.image)}
+                                        alt={exp.title}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                        className="object-cover"
+                                        // Esto mantiene la imagen en cache más agresivamente
+                                        placeholder="blur"
+                                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+                                    />
+                                </div>
 
-                                {/* Contenido */}
-                                <div className="p-4">
-                                    <h2 className="text-lg font-semibold">{exp.title}</h2>
+                                <div className="p-6 flex flex-col flex-grow">
+                                    <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                        {exp.title}
+                                    </h2>
 
-                                    <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                                    <p className="text-sm text-gray-500 line-clamp-2 mt-2 flex-grow">
                                         {exp.description}
                                     </p>
 
-                                    <div className="flex justify-between items-center mt-3 text-sm">
-                                        <span>{exp.duration}</span>
-                                        <div className="flex gap-4 justify-between ">
-                                            <span className="font-semibold">
+                                    <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                                        <span className="text-xs font-medium px-2 py-1 bg-gray-100 rounded-full text-gray-600">
+                                            ⏱ {exp.duration}
+                                        </span>
+                                        <div className="text-right">
+                                            <p className="text-lg font-bold text-black leading-none">
                                                 {exp.priceFormatted}
-                                            </span>
-                                            <p>(IVA incluido)</p>
+                                            </p>
+                                            <p className="text-[10px] text-gray-400 mt-1 uppercase font-bold tracking-tighter">IVA incluido</p>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </Link>
                         ))}

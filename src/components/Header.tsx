@@ -8,7 +8,6 @@ import { useCart } from "@/context/cartContext";
 
 const navItems = [
   { href: "/", label: "Conócenos" },
-  { href: "/pasion", label: "Pasión futbolera" },
   { href: "/armatuaventura", label: "Arma tu aventura" },
   { href: "/experiencias", label: "Experiencias" },
 ];

@@ -1,3 +1,5 @@
+import { Globe2Icon } from "lucide-react"
+
 export default function ConocenosSection() {
   return (
     <section id="conocenos" className="bg-[#1f1e58] py-20">
@@ -10,7 +12,7 @@ export default function ConocenosSection() {
               style={{ backgroundColor: "#7d9fab" }}
             >
               <img
-                src="https://ext.same-assets.com/619569696/1231009136.jpeg"
+                src="https://images.unsplash.com/photo-1653661279002-692227e35f0f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Calle colorida de México"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
@@ -29,11 +31,7 @@ export default function ConocenosSection() {
             </p>
 
             <div className="flex items-start gap-3">
-              <img
-                src="https://ext.same-assets.com/619569696/2545856868.svg"
-                alt="Globe"
-                className="w-6 h-6 mt-1"
-              />
+              <Globe2Icon className="w-6 h-6 mt-1" />
               <div>
                 <span className="font-semibold text-[#e8e0c6]">Nuestra esencia</span>
                 <p className="text-white/80 mt-1">

@@ -35,6 +35,7 @@ export async function processEtominPayment(payment: PaymentData) {
         etomin.auth(token);
 
         // 2. Tokenizar la tarjeta
+        console.log(payment)
         const tokenResponse = await etomin.postCardTokenizer({
             cardData: {
                 cardNumber: payment.cardData.number.replace(/\s/g, ''), // Limpiar espacios
@@ -45,6 +46,7 @@ export async function processEtominPayment(payment: PaymentData) {
         });
 
         const cardToken = tokenResponse.data.cardNumberToken;
+        console.log(tokenResponse.data)
 
         // 3. Realizar la Venta (Sale)
         // El código de moneda '484' es para Pesos Mexicanos (MXN)
@@ -72,6 +74,7 @@ export async function processEtominPayment(payment: PaymentData) {
         });
 
         // Retornamos la data si el status es aprobado (usualmente 'APPROVED' o '00')
+        console.log(saleResponse.data)
         return saleResponse.data;
 
     } catch (error: any) {
@@ -79,3 +82,25 @@ export async function processEtominPayment(payment: PaymentData) {
         throw new Error(error.response?.data?.message || "Error al procesar el pago");
     }
 }
+
+
+
+/**
+ * {
+  id: 2422539,
+  reference: 'VMT-312077',
+  amount: 4200,
+  customerEmail: 'mrxd9767@gmail.com',
+  cardNumber: '123456 **** 5678',
+  authorizationNumber: '000000',
+  transactionId: '766003616176275532',
+  responseCode: '00',
+  responseMessage: 'Approved',
+  status: 'APPROVED',
+  mode: 'SANDBOX',
+  orderId: '69cc18975669093b9f3aa277',
+  customer: '69cb1ecbbef3ad849607fc3b',
+  message: 'Aprobado',
+  billingDescriptor: 'GVM*VENDERS'
+}
+ */
