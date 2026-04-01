@@ -25,8 +25,6 @@ export async function POST(req: Request) {
           <div style="padding: 40px; color: #444;">
             <p>Hola <strong>${nombre}</strong>,</p>
             <p>Hemos recibido tu interés en la experiencia <strong>${experiencia_title}</strong>. Nuestro equipo concierge está revisando los detalles.</p>
-
-            <a href="${statusLink}" style="display: inline-block; background: #212121; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">CONSULTAR ESTATUS / PAGAR</a>
           </div>
           <div style="background: #eee; padding: 20px; text-align: center; font-size: 12px;">
             Viva Trip México &copy; ${new Date().getFullYear()}
@@ -47,7 +45,7 @@ export async function POST(req: Request) {
           <p><strong>Teléfono:</strong> ${telefono}</p>
           <p><strong>Experiencia:</strong> ${experiencia_title}</p>
           <p><strong>Detalles:</strong> ${detalles}</p>
-          <a href="${adminEditLink}" style="background: #FF9800; color: white; padding: 10px 20px; text-decoration: none; display: inline-block;">DEFINIR PRECIO</a>
+          <p>Favor de enviar el nó. de cotización al cliente<p>
         </div>
       `
     });

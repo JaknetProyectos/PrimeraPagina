@@ -1,106 +1,134 @@
+"use client";
+import { Suspense, useState, useCallback, useEffect } from "react";
+import { useQuotes } from "@/hooks/useCotizaciones";
+import { useCart } from "@/context/cartContext";
+import { useRouter, useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Image from "next/image";
+import { Loader2, Search, CreditCard, ShieldCheck, Info } from "lucide-react";
 
-export default function CotizacionDetallePage() {
+function PayFootballContent() {
+    const searchParams = useSearchParams();
+    const queryFolio = searchParams.get('folio');
+    const { getQuoteByFolio } = useQuotes();
+    const { addToCart } = useCart();
+    const router = useRouter();
+
+    const [folio, setFolio] = useState("");
+    const [montoManual, setMontoManual] = useState<string>("");
+    const [quoteFound, setQuoteFound] = useState<any>(null);
+    const [searching, setSearching] = useState(false);
+    const [msg, setMsg] = useState("");
+
+    const validateFolio = useCallback(async (f: string) => {
+        if (!f || f.length < 3) return;
+        setSearching(true);
+        setMsg("");
+        try {
+            const data = await getQuoteByFolio(f.trim().toUpperCase());
+            if (data) {
+                setQuoteFound(data);
+                setMontoManual(data.price?.toString() || "");
+                setMsg("COTIZACIÓN LOCALIZADA");
+            } else {
+                setQuoteFound(null);
+                setMsg("FOLIO EXTERNO DETECTADO");
+            }
+        } finally {
+            setSearching(false);
+        }
+    }, [getQuoteByFolio]);
+
+    useEffect(() => {
+        if (queryFolio) {
+            setFolio(queryFolio.toUpperCase());
+            validateFolio(queryFolio.toUpperCase());
+        }
+    }, [queryFolio, validateFolio]);
+
+    const handlePay = () => {
+        if (!folio || !montoManual) return;
+        addToCart({
+            experienceId: quoteFound?.folio || folio.toUpperCase(),
+            title: quoteFound?.experiencia_title || `EXP. TOTAL: ${folio.toUpperCase()}`,
+            destinationName: "Pasión Futbolera VIP",
+            price: Number(montoManual),
+            personas: parseInt(quoteFound?.personas) || 1,
+            fecha: new Date().toISOString().split('T')[0],
+            description: quoteFound ? `Titular: ${quoteFound.nombre}` : "Folio Manual"
+        });
+        router.push("/cart");
+    };
+
     return (
-        <div className="min-h-screen">
-
-            <Header />
-
-            <main className="container mt-10 mx-auto px-6 py-16 space-y-16">
-
-                {/* TOP */}
-                <section className="grid md:grid-cols-2 gap-10 items-center">
-
-                    {/* COLUMNA 1 */}
-                    <div className="flex flex-col items-center md:items-start gap-6">
-                        <h1 className="text-2xl md:text-4xl font-light text-center md:text-left">
-                            Experiencia personalizada
-                        </h1>
-
-                        <Image
-                            src="https://upload.wikimedia.org/wikipedia/commons/0/07/%D0%A4%D0%9A_%22%D0%9A%D0%BE%D0%BB%D0%BE%D1%81%22_%28%D0%97%D0%B0%D1%87%D0%B5%D0%BF%D0%B8%D0%BB%D0%BE%D0%B2%D0%BA%D0%B0%2C_%D0%A5%D0%B0%D1%80%D1%8C%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%29_-_%D0%A4%D0%9A_%22%D0%91%D0%B0%D0%BB%D0%BA%D0%B0%D0%BD%D1%8B%22_%28%D0%97%D0%B0%D1%80%D1%8F%2C_%D0%9E%D0%B4%D0%B5%D1%81%D1%81%D0%BA%D0%B0%D1%8F_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%29_%2818790931100%29.jpg"
-                            alt="Balón"
-                            width={450}
-                            height={450}
-                            className="object-contain rounded-xl drop-shadow-xl"
-                        />
+        <div className="container mx-auto px-6 max-w-5xl py-20">
+            <div className="bg-zinc-900 border border-white/10 rounded-[3rem] overflow-hidden grid md:grid-cols-2 shadow-2xl">
+                {/* LADO INFO */}
+                <div className="p-12 bg-gradient-to-br from-[#03A9F4] to-blue-900 text-white flex flex-col justify-between">
+                    <div>
+                        <h2 className="text-4xl font-black italic uppercase tracking-tighter mb-4">Experiencia <br /> Total</h2>
+                        <div className="h-1 w-12 bg-white mb-8" />
                     </div>
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-4 bg-black/20 p-4 rounded-2xl backdrop-blur-md">
+                            <ShieldCheck className="text-white" />
+                            <p className="text-[10px] font-bold uppercase tracking-widest">Transacción Cifrada 256-bit</p>
+                        </div>
+                    </div>
+                </div>
 
-                    {/* COLUMNA 2 */}
-                    <div className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border space-y-6">
-
-                        <p className=" leading-relaxed">
-                            Vive el fútbol como un verdadero local, disfrutando de transporte,
-                            tacos, bebidas y souvenirs. Estamos aquí para apoyarte y diseñar
-                            la experiencia perfecta para ti y tu grupo de amigos.
-                        </p>
-
-                        <p className="text-sm ">
-                            El monto de la cotización ya incluye IVA
-                        </p>
-
-                        {/* DATOS */}
-                        <div className="space-y-4 bg-white/10">
-
-                            <div>
-                                <p className="text-sm  mb-1">
-                                    No. de cotización
-                                </p>
-                                <input className="bg-white/10 border  w-full rounded-lg px-4 py-2">
-
-                                </input>
+                {/* LADO FORMULARIO - SIEMPRE VISIBLE */}
+                <div className="p-10 md:p-14 bg-black/40 backdrop-blur-xl space-y-10">
+                    <div className="space-y-8">
+                        {/* FOLIO */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-black text-[#03A9F4] uppercase tracking-[0.3em]">Folio de Seguimiento</label>
+                            <div className="flex items-center border-b-2 border-white/10 focus-within:border-[#03A9F4] transition-all">
+                                <input type="text" value={folio} placeholder="PSN-XXXX" className="w-full bg-transparent py-4 text-2xl font-mono text-white outline-none uppercase tracking-widest"
+                                    onChange={(e) => setFolio(e.target.value)} onBlur={() => validateFolio(folio)} />
+                                {searching ? <Loader2 className="animate-spin text-[#03A9F4]" /> : <Search className="text-white/20" />}
                             </div>
-
-                            <div>
-                                <p className="text-sm  mb-1">
-                                    Cotización
-                                </p>
-                                <input className="bg-white/10 w-full border rounded-lg px-4 py-2 font-medium">
-
-                                </input>
-                            </div>
-
+                            {msg && <p className="text-[9px] font-black uppercase text-[#03A9F4] tracking-widest">{msg}</p>}
                         </div>
 
-                        {/* BOTÓN */}
-                        <button className="w-full bg-blue-500 text-white py-3 rounded-lg font-mediumtransition">
-                            Añadir al carrito
-                        </button>
+                        {/* DATOS DINÁMICOS */}
+                        {quoteFound && (
+                            <div className="bg-white/5 p-6 rounded-2xl border-l-4 border-[#03A9F4] animate-in fade-in slide-in-from-left-4">
+                                <p className="text-[9px] text-white/30 uppercase font-black tracking-widest">Titular</p>
+                                <p className="text-xl font-bold text-white uppercase italic">{quoteFound.nombre}</p>
+                            </div>
+                        )}
 
+                        {/* MONTO SIEMPRE VISIBLE */}
+                        <div className="space-y-2 pt-4">
+                            <label className="text-[10px] font-black text-[#03A9F4] uppercase tracking-[0.3em]">Monto Total Acordado (MXN)</label>
+                            <div className="flex items-baseline gap-2 border-b-2 border-white/10 focus-within:border-white transition-all">
+                                <span className="text-2xl font-light text-white/20">$</span>
+                                <input type="number" value={montoManual} placeholder="0.00" className="w-full bg-transparent py-4 text-5xl font-black text-white outline-none tracking-tighter"
+                                    onChange={(e) => setMontoManual(e.target.value)} />
+                            </div>
+                        </div>
                     </div>
 
-                </section>
-
-                {/* DESCRIPCIÓN */}
-                <section className="bg-white/5 backdrop-blur-md p-8 rounded-2xl border  space-y-4">
-
-                    <h2 className="text-xl font-medium">
-                        Descripción
-                    </h2>
-
-                    <p className="leading-relaxed">
-                        Vive el fútbol como un verdadero local, disfrutando de transporte,
-                        tacos, bebidas y souvenir. Sumérgete en la emoción del juego de
-                        principio a fin, sin complicaciones, en un ambiente seguro y auténtico.
-                    </p>
-
-                    <p className="leading-relaxed">
-                        Además, durante el Mundial, ofrecemos experiencias especiales de
-                        transmisión en vivo, donde podrás disfrutar de los partidos en
-                        pantallas gigantes y con la compañía de otros aficionados,
-                        manteniendo la misma energía y pasión que se vive en el estadio.
-                        Una experiencia única que combina deporte, gastronomía y ambiente
-                        festivo.
-                    </p>
-
-                </section>
-
-            </main>
-
-            <Footer />
-
+                    <button onClick={handlePay} disabled={!folio || !montoManual} className="w-full bg-white text-black py-6 rounded-2xl font-black uppercase text-xs tracking-[0.3em] hover:bg-[#03A9F4] hover:text-white transition-all flex items-center justify-center gap-3 disabled:opacity-20">
+                        <CreditCard size={18} /> Agregar al carrito
+                    </button>
+                </div>
+            </div>
         </div>
+    );
+}
+
+export default function PayFootballPage() {
+    return (
+        <>
+            <Header />
+            <main className="min-h-screen bg-black pt-20">
+                <Suspense fallback={<div className="py-40 text-center text-white font-black uppercase tracking-widest">Iniciando Checkout...</div>}>
+                    <PayFootballContent />
+                </Suspense>
+            </main>
+            <Footer />
+        </>
     );
 }
