@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import useDestination from "@/hooks/useDestination";
 import { useExperiences } from "@/hooks/useExperiences";
-import { useReviews } from "@/hooks/useReviews";
+
 import {
   ArrowLeft,
   Clock,

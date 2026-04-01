@@ -1,25 +1,27 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "@/supabase/client";
+import { Cotizacion, CreateCotizacionInput } from "@/interfaces/Cotization";
 
 export function useQuotes() {
     const [loading, setLoading] = useState(false);
 
     // CREATE
-    const createQuote = async (formData: any) => {
+    const createQuote = async (formData: CreateCotizacionInput): Promise<Cotizacion> => {
         setLoading(true);
         try {
+            // Si no viene un folio, podrías generar uno aleatorio corto aquí
+            const payload = {
+                ...formData
+            };
+
             const { data, error } = await supabase
                 .from("cotizaciones_vivatrip")
-                .insert([formData])
+                .insert([payload])
                 .select()
                 .single();
 
             if (error) throw error;
-
-            // Aquí disparas el envío de email (puedes usar un Server Action)
-            // Ejemplo: await sendQuoteEmail(data);
-            
             return data;
         } catch (error) {
             console.error("Error al crear cotización:", error);
@@ -29,8 +31,38 @@ export function useQuotes() {
         }
     };
 
+    // READ: Ahora busca por la columna FOLIO (el código que el usuario conoce)
+    const getQuoteByFolio = async (folio: string): Promise<Cotizacion | null> => {
+        setLoading(true);
+        try {
+            const { data, error } = await supabase
+                .from("cotizaciones_vivatrip")
+                .select("*")
+                .eq("folio", folio.trim().toUpperCase()) // Normalizamos a mayúsculas
+                .single();
+
+            if (error) return null; // Manejo silencioso si no existe
+            return data;
+        } catch (error) {
+            console.error("Error al buscar folio:", error);
+            return null;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // UPDATE: Útil para cuando el usuario realiza un pago parcial
+    const updateQuote = async (id: string, updates: any) => {
+        const { data, error } = await supabase
+            .from("cotizaciones_vivatrip")
+            .update(updates)
+            .eq("id", id); // El update se sigue haciendo por ID por seguridad
+        if (error) throw error;
+        return data;
+    };
+
     // READ (Para un panel admin futuro)
-    const getQuote = async (id: string) => {
+    const getQuote = async (id: string): Promise<Cotizacion | null> => {
         const { data, error } = await supabase
             .from("cotizaciones_vivatrip")
             .select("*")
@@ -40,24 +72,6 @@ export function useQuotes() {
         return data;
     };
 
-    // UPDATE
-    const updateQuote = async (id: string, updates: any) => {
-        const { data, error } = await supabase
-            .from("cotizaciones_vivatrip")
-            .update(updates)
-            .eq("id", id);
-        if (error) throw error;
-        return data;
-    };
 
-    // DELETE
-    const deleteQuote = async (id: string) => {
-        const { error } = await supabase
-            .from("cotizaciones_vivatrip")
-            .delete()
-            .eq("id", id);
-        if (error) throw error;
-    };
-
-    return { createQuote, getQuote, updateQuote, deleteQuote, loading };
+    return { createQuote, getQuote, updateQuote, getQuoteByFolio, loading };
 }

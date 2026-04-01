@@ -109,7 +109,7 @@ export async function POST(req: Request) {
             </div>
             <div class="summary-row total-row">
               <span class="summary-label" style="font-weight: bold; color: #212121;">Total Pagado</span>
-              <span class="summary-value total-price">$${checkoutInfo.subtotal} MXN</span>
+              <span class="summary-value total-price">${checkoutInfo.subtotal} MXN</span>
             </div>
           </div>
 

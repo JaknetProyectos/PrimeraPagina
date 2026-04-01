@@ -10,6 +10,7 @@ const navItems = [
   { href: "/", label: "Conócenos" },
   { href: "/armatuaventura", label: "Arma tu aventura" },
   { href: "/experiencias", label: "Experiencias" },
+  { href: "/pasion", label: "Pasión futbolera" },
 ];
 
 

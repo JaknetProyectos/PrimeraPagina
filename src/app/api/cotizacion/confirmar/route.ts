@@ -6,15 +6,21 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {
   try {
     const data = await req.json();
-    const { id, nombre, email, precio_final, experiencia_slug, personas } = data;
+    // Añadimos 'folio' a la desestructuración, que viene del cliente (AdminQuoteEdit)
+    const { id, nombre, email, precio_final, experiencia_title, personas, folio } = data;
 
-    // Generamos el enlace directo con el query param
+    // El folio final será el manual si existe, o los primeros 8 caracteres del ID como respaldo
+    const displayFolio = folio || id.substring(0, 8).toUpperCase();
+
+    // Generamos el enlace. Nota: Si tu página de pago ahora busca por Folio, 
+    // podrías cambiar quoteId por folio, pero mantener el ID es más seguro técnicamente.
     const paymentLink = `https://vivamytrip.com/pagatuaventura?quoteId=${id}`;
 
     await resend.emails.send({
       from: "Viva Trip <contacto@vivamytrip.com>",
       to: email,
-      subject: `✅ Propuesta Lista: ${experiencia_slug} - Folio ${id.substring(0, 8).toUpperCase()}`,
+      // Usamos el Título real de la experiencia y el Folio manual en el asunto
+      subject: `✅ Propuesta Lista: ${experiencia_title || 'Tu Viaje'} - Folio ${displayFolio}`,
       html: `
     <!DOCTYPE html>
     <html>
@@ -32,40 +38,40 @@ export async function POST(req: Request) {
         .detail-item { font-size: 13px; margin-bottom: 8px; color: #666; }
         .btn-pay { display: block; background-color: #FF9800; color: #ffffff !important; text-decoration: none; padding: 18px; border-radius: 4px; font-weight: bold; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; margin-top: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .footer { background-color: #f4f4f4; padding: 20px; text-align: center; font-size: 11px; color: #999; }
-        .folio { font-family: monospace; font-size: 12px; color: #03A9F4; background: #E3F2FD; padding: 4px 8px; border-radius: 4px; }
+        .folio-tag { font-family: monospace; font-size: 14px; color: #03A9F4; background: #E3F2FD; padding: 6px 12px; border-radius: 4px; font-weight: bold; }
       </style>
     </head>
     <body>
       <div class="main-container">
         <div class="hero">
-          <h1>¡Tu aventura te espera!</h1>
+          <h1>¡Tu aventura está lista!</h1>
         </div>
         
         <div class="content">
           <p>Hola <strong>${nombre}</strong>,</p>
-          <p>Nuestro equipo de expertos ha finalizado el diseño de tu itinerario personalizado. Estamos listos para hacer realidad tu viaje a <strong>${experiencia_slug}</strong>.</p>
+          <p>Hemos finalizado tu presupuesto para <strong>${experiencia_title || 'tu próxima experiencia'}</strong>. Aquí tienes los detalles para confirmar tu reserva:</p>
           
           <div class="price-box">
-            <span class="price-label">Inversión Total</span>
-            <div class="price-value">$${Number(precio_final).toLocaleString()} MXN</div>
-            <span class="folio">FOLIO: ${id.toUpperCase()}</span>
+            <span class="price-label">Monto Total</span>
+            <div class="price-value">$${Number(precio_final).toLocaleString('es-MX')} MXN</div>
+            <span class="folio-tag">FOLIO: ${displayFolio}</span>
           </div>
 
           <div class="details-list">
             <div class="detail-item"><strong>Viajeros:</strong> ${personas}</div>
-            <div class="detail-item"><strong>Estatus:</strong> Precio Confirmado ✅</div>
+            <div class="detail-item"><strong>Referencia:</strong> ${displayFolio}</div>
+            <div class="detail-item"><strong>Estatus:</strong> Pendiente de Pago ✅</div>
           </div>
 
-          <a href="${paymentLink}" class="btn-pay">Pagar y Confirmar Ahora</a>
+          <a href="${paymentLink}" class="btn-pay">Pagar y Reservar</a>
 
           <p style="text-align: center; font-size: 12px; color: #999; margin-top: 30px;">
-            Este enlace es único para tu sesión de pago seguro. <br>
+            Este presupuesto es válido por tiempo limitado. <br>
           </p>
         </div>
 
         <div class="footer">
           <p>&copy; ${new Date().getFullYear()} Viva Trip México | vivamytrip.com</p>
-          <p>Este es un correo automático, por favor no respondas directamente.</p>
         </div>
       </div>
     </body>

@@ -11,6 +11,6 @@ export interface Experience {
   image: string;
   category: string;
   rating: number;
-  reviewCount: number;
+  reviewCount?: number;
   slug?: string;
 }
