@@ -69,7 +69,7 @@ export async function POST(req: Request) {
                 <p style="color: #616161; font-size: 13px; line-height: 1.5; margin-top: 10px; font-style: italic;">"${mensaje}"</p>
               </div>
 
-              <p style="font-size: 12px; color: #9e9e9e; border-top: 1px solid #f5f5f5; pt-20; margin-top: 30px; padding-top: 20px;">Si necesitas asistencia urgente, puedes responder a este correo o contactarnos vía WhatsApp.</p>
+              <p style="font-size: 12px; color: #9e9e9e; border-top: 1px solid #f5f5f5; pt-20; margin-top: 30px; padding-top: 20px;">Si necesitas asistencia urgente, puedes responder a este correo.</p>
             </div>
             <div style="background: #eeeeee; padding: 30px; text-align: center; font-size: 11px; color: #9e9e9e;">
               <p style="margin: 0; letter-spacing: 1px;">&copy; ${new Date().getFullYear()} VIVA MY TRIP MÉXICO | <a href="https://vivamytrip.com" style="color: #03A9F4; font-weight: bold; text-decoration: none;">VIVAMYTRIP.COM</a></p>

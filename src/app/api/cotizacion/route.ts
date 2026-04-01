@@ -77,7 +77,6 @@ export async function POST(req: Request) {
 
         <div class="footer">
           <p>&copy; ${new Date().getFullYear()} Viva Trip México | vivamytrip.com</p>
-          <p>Para soporte inmediato contáctanos vía WhatsApp.</p>
         </div>
       </div>
     </body>

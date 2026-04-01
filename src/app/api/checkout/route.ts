@@ -138,13 +138,9 @@ export async function POST(req: Request) {
           <div style="margin-top: 40px; padding: 20px; border-left: 4px solid #FF9800; background: #FFF8E1; border-radius: 0 4px 4px 0;">
             <p style="margin: 0; font-size: 13px; color: #856404;">
               <strong>¿Qué sigue?</strong><br>
-              Recibirás un segundo correo con tus cupones digitales y las instrucciones de punto de encuentro para cada una de tus experiencias en breve.
+              Recibirás un segundo correo con las instrucciones de punto de encuentro para cada una de tus experiencias en breve.
             </p>
           </div>
-
-          <p style="text-align: center; font-size: 12px; color: #9e9e9e; margin-top: 40px;">
-            ¿Dudas? Chatea con nosotros en <a href="https://wa.me/TUNUMERO" class="support-link">WhatsApp</a> o responde a este email.
-          </p>
         </div>
 
         <div class="footer">
