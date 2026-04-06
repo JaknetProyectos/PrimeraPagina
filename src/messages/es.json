@@ -1,0 +1,341 @@
+{
+  "Cart": {
+    "checkout": "Pagar",
+    "empty_title_part1": "Tu carrito está",
+    "empty_title_part2": "vacío",
+    "empty_description": "Parece que aún no has añadido ninguna aventura a tu itinerario. ¡El mundo te espera!",
+    "explore_destinations": "Explorar Destinos",
+    "football_passion": "Pasión Futbolera",
+    "back_home": "Volver al inicio",
+    "summary": {
+      "title": "Revisar selección",
+      "remove": "Quitar",
+      "date_label": "Fecha",
+      "travelers_label": "Viajeros",
+      "total_label": "Total del pedido",
+      "people_label": "personas"
+    },
+    "billing": {
+      "title": "Datos de Facturación",
+      "labels": {
+        "country": "País / Región"
+      },
+      "placeholders": {
+        "name": "Nombre completo",
+        "email": "Correo electrónico",
+        "address": "Dirección (Calle y número)",
+        "apt": "Apartamento, habitación, etc. (opcional)",
+        "city": "Población / Ciudad",
+        "state": "Estado / Provincia",
+        "zip": "Código Postal",
+        "phone": "Teléfono"
+      },
+      "countries": {
+        "other": "Otro"
+      }
+    },
+    "payment": {
+      "title": "Pago con Tarjeta",
+      "placeholders": {
+        "card_name": "Titular de la tarjeta",
+        "card_number": "Número de tarjeta"
+      },
+      "security_notice": "Pago procesado de forma segura SSL 256-bit",
+      "pay_button": "Pagar",
+      "processing": "Procesando..."
+    },
+    "success": {
+      "title": "¡Pago Exitoso!",
+      "message": "Hemos enviado los detalles de tu reserva a {email}",
+      "back_home": "Volver al inicio"
+    },
+    "errors": {
+      "missing_data": "Por favor completa todos los datos obligatorios.",
+      "generic_payment": "Error al procesar el pago"
+    }
+  },
+  "Common": {
+    "nav": {
+      "about": "Conócenos",
+      "build_adventure": "Arma tu aventura",
+      "experiences": "Experiencias",
+      "football_passion": "Pasión futbolera"
+    }
+  },
+  "Hero": {
+    "title_visit": "Visita",
+    "title_mexico": "México",
+    "description": "Descubre la magia de nuestras tierras con seguridad, comodidad y un toque de aventura inolvidable.",
+    "explore_the": "Explora la",
+    "store": "Tienda",
+    "start_trip": "Comenzar viaje",
+    "labels": {
+      "culture": "Cultura y Tradición",
+      "luxury": "Lujo y Playa",
+      "magic": "Magia en el Agua",
+      "history": "Historia y Vino"
+    }
+  },
+  "About": {
+    "subtitle": "Conócenos",
+    "image_alt": "Calle colorida de México",
+    "description": "En <brand>VivaTrip</brand> creemos que viajar es mucho más que moverse de un lugar a otro: es vivir experiencias que despiertan los sentidos, conectan con la cultura y dejan recuerdos inolvidables.",
+    "essense_title": "Nuestra esencia",
+    "essense_description": "Diseñamos recorridos únicos que combinan aventura, historia, naturaleza y gastronomía."
+  },
+  "CustomAdventure": {
+    "hero_title_line1": "ARMA TU",
+    "hero_title_line2": "AVENTURA",
+    "image_alt": "Grupo de viajeros",
+    "upper_subtitle": "Quieres armar un plan a la medida",
+    "main_subtitle": "Te ayudamos",
+    "question": "¿Necesitas más información o quieres planear una aventura en grupo?",
+    "contact_text": "Si tienes dudas sobre nuestros servicios, deseas más detalles acerca de este tour o estás planeando una experiencia especial para un grupo de personas, <contact>contáctanos.</contact>",
+    "cta_button": "Arma tu aventura"
+  },
+  "Mission": {
+    "title": "MISIÓN",
+    "description": "Inspirar a cada viajero a descubrir la magia de México con seguridad, comodidad y un toque de aventura. Queremos que cada experiencia sea un puente entre tu curiosidad y la riqueza cultural y natural que nos rodea."
+  },
+  "Experiences": {
+    "hero_title": "EXPERIENCIAS",
+    "image_alt": "Experiencias",
+    "upper_subtitle": "NUESTROS PLANES",
+    "notice_title": "Aviso Importante",
+    "notice_description": "El servicio de experiencia <bold>no incluye transporte hacia o desde el punto de encuentro</bold>. En caso de requerirse, el traslado deberá ser gestionado y cubierto directamente por el cliente. La empresa no asume responsabilidad por retrasos, contratiempos o gastos derivados del transporte externo contratado por el participante.",
+    "title": "Aventuras",
+    "from_label": "Desde",
+    "tax_included": "IVA incluido",
+    "empty_state": "No hay experiencias para este destino",
+    "error_message": "Error al cargar",
+    "pagination": {
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "info": "Página {current} de {total}"
+    }
+  },
+  "Contact": {
+    "title": "Contáctanos",
+    "subtitle": "¿Tienes preguntas? Estamos aquí para ayudarte",
+    "error_message": "Hubo un error al enviar el mensaje. Intenta de nuevo.",
+    "connection_error": "Error de conexión.",
+    "info": {
+      "phone": {
+        "label": "Teléfono",
+        "hours": "Lun - Vie, 9am - 6pm"
+      },
+      "email": {
+        "label": "Email",
+        "response": "Respondemos en 24 horas"
+      },
+      "location": {
+        "label": "Ubicación",
+        "city": "Ciudad de México, México",
+        "appointment": "Visitas con cita previa"
+      }
+    },
+    "form": {
+      "name_label": "Nombre",
+      "name_placeholder": "Tu nombre",
+      "email_label": "Email",
+      "email_placeholder": "tu@email.com",
+      "message_label": "Mensaje",
+      "message_placeholder": "¿En qué podemos ayudarte?",
+      "submit_button": "Enviar mensaje"
+    },
+    "success": {
+      "title": "Mensaje enviado",
+      "description": "Nos pondremos en contacto pronto"
+    }
+  },
+  "Footer": {
+    "brand_description": "Experiencias únicas que combinan aventura, historia y cultura en México.",
+    "country": "México",
+    "sections": {
+      "payments": "Aceptamos",
+      "contact": "Contacto",
+      "legal": "Legal"
+    },
+    "legal_links": {
+      "terms": "Términos y condiciones",
+      "refunds": "Política de reembolsos",
+      "privacy": "Aviso de privacidad",
+      "consumer": "Protección al Consumidor"
+    },
+    "copyright": "© {year} Viva Trip. High-End Travel Experiences.",
+    "made_with_love": "Hecho con cariño en México"
+  },
+  "AdventurePlanner": {
+    "hero": {
+      "overline": "Arma tu aventura",
+      "title": "Cuenta con expertos",
+      "description": "Te ayudamos a diseñar recorridos únicos que combinan aventura, historia, naturaleza y gastronomía."
+    },
+    "modal": {
+      "title": "Solicitud Recibida",
+      "description": "En breve recibirás tu folio para pagar tu cotización.",
+      "button": "Entendido"
+    },
+    "content": {
+      "title": "¿Necesitas más información o quieres planear una aventura en grupo?",
+      "description": "Si tienes dudas sobre nuestros servicios, deseas más detalles acerca de este tour o estás planeando una experiencia especial para un grupo de personas, contáctanos. Nuestro equipo estará encantado de ofrecerte atención personalizada para ayudarte a organizar una aventura a la medida, adaptada a tus intereses y necesidades. Ya sea que busques una excursión cultural, un día de exploración en cenotes o una combinación única de actividades en Tulum y sus alrededores, estamos aquí para apoyarte y diseñar la experiencia perfecta para ti y tu grupo."
+    },
+    "form": {
+      "header_title": "Formulario de Solicitud",
+      "header_subtitle": "Completa los campos para recibir tu cotización",
+      "default_exp_title": "Aventura Personalizada",
+      "error_alert": "Hubo un error al procesar tu solicitud.",
+      "submit_button": "Enviar Solicitud",
+      "labels": {
+        "name": "Nombre completo",
+        "email": "Email de contacto",
+        "phone": "Teléfono",
+        "group_type": "Tipo de Grupo",
+        "base_experience": "Experiencia Base",
+        "details": "Mensaje y detalles extra"
+      },
+      "options": {
+        "individual": "Individual",
+        "couple": "Pareja",
+        "group": "+4 Grupo"
+      },
+      "placeholders": {
+        "select_adventure": "Seleccionar aventura...",
+        "details": "Ej: Requiero transporte privado y guía bilingüe..."
+      },
+      "footer": {
+        "question": "¿Ya tienes una cotización?",
+        "link": "Pagar Cotización"
+      }
+    }
+  },
+  "PayQuote": {
+    "loading": "Cargando Sistema",
+    "branding": {
+      "title_part1": "Paga tu",
+      "title_part2": "Aventura",
+      "subtitle": "Estamos aquí para apoyarte y diseñar la experiencia perfecta para ti y tu grupo."
+    },
+    "form": {
+      "header": "Detalles de Pago",
+      "labels": {
+        "folio": "Número de Cotización",
+        "passenger": "Pasajero Titular",
+        "amount": "Monto Total Acordado (Incluye IVA)"
+      },
+      "messages": {
+        "found": "Cotización encontrada y vinculada.",
+        "external": "Folio externo detectado. Ingresa el monto acordado."
+      },
+      "submit_button": "Añadir al Carrito"
+    },
+    "cart": {
+      "custom_prefix": "Reserva Personalizada",
+      "client": "Cliente",
+      "folio_label": "Folio de seguimiento"
+    },
+    "editorial": {
+      "title": "Descripción",
+      "subtitle": "¿Necesitas más información o quieres planear una aventura en grupo?",
+      "description": "Si tienes dudas sobre nuestros servicios, deseas más detalles acerca de este tour o estás planeando una experiencia especial para un grupo de personas, contáctanos. Nuestro equipo estará encantado de ofrecerte atención personalizada para ayudarte a organizar una aventura a la medida, adaptada a tus intereses y necesidades."
+    }
+  },
+  "FootballRequest": {
+    "hero": {
+      "title_part1": "Solicitar",
+      "title_part2": "Presupuesto"
+    },
+    "card": {
+      "overline": "Experiencia Total",
+      "title_part1": "Pasión",
+      "title_part2": "Futbolera",
+      "description": "Vive el fútbol como un verdadero local, disfrutando de <bold>transporte, tacos, bebidas y souvenir</bold>. Sumérgete en la emoción del juego de principio a fin, sin complicaciones, en un ambiente seguro y auténtico.<br/>Durante el Mundial, ofrecemos experiencias de transmisión en vivo con pantallas gigantes y ambiente festivo, combinando deporte y gastronomía única."
+    },
+    "form": {
+      "labels": {
+        "name": "Nombre Completo",
+        "email": "Correo Electrónico",
+        "details": "¿Qué partido o experiencia buscas?"
+      },
+      "submit_button": "Enviar Petición",
+      "error_alert": "Error al registrar solicitud.",
+      "footer": {
+        "question": "¿Ya cuentas con una cotización?",
+        "link": "Paga tu cotización"
+      }
+    },
+    "success": {
+      "title": "¡Petición Recibida!",
+      "description": "Te contactaremos a la brevedad con una propuesta y tu folio de pago."
+    }
+  },
+  "PayFootball": {
+    "loading": "Iniciando Checkout...",
+    "branding": {
+      "overline": "Pasión Futbolera",
+      "title_part1": "Experiencia",
+      "title_part2": "Total",
+      "description": "Vive el fútbol como un verdadero local, disfrutando de transporte, tacos, bebidas, souvenir. Estamos aquí para apoyarte y diseñar la experiencia perfecta para ti y tu grupo de amigos."
+    },
+    "form": {
+      "labels": {
+        "folio": "No. de cotización",
+        "passenger": "Titular",
+        "amount": "Monto Total Acordado (MXN)"
+      },
+      "messages": {
+        "found": "COTIZACIÓN LOCALIZADA",
+        "external": "FOLIO EXTERNO DETECTADO"
+      },
+      "submit_button": "Agregar al carrito"
+    },
+    "cart": {
+      "title_prefix": "EXP. TOTAL",
+      "passenger": "Titular",
+      "manual_folio": "Folio Manual"
+    },
+    "editorial": {
+      "title": "Descripción",
+      "subtitle": "Vive el fútbol como un verdadero local, disfrutando de <white>transporte, tacos, bebidas y souvenir.</white> Sumérgete en la emoción del juego de principio a fin, sin complicaciones, en un ambiente seguro y auténtico.",
+      "description": "Además, durante el mundial, ofrecemos experiencias especiales de transmisión en vivo, donde podrás disfrutar de los partidos en pantallas gigantes y con la compañía de otros aficionados, manteniendo la misma energía y pasión que se vive en el estadio. Una experiencia única que combina deporte, gastronomía y ambiente festivo."
+    }
+  },
+  "ExperienceDetail": {
+    "error_loading": "Error al cargar la experiencia",
+    "alerts": {
+      "select_date": "Por favor selecciona una fecha para tu aventura"
+    },
+    "purchase_card": {
+      "price_from": "Precio desde",
+      "tax_note": "IVA (16%) INCLUIDO \n POR PERSONA",
+      "labels": {
+        "date": "Selecciona tu fecha",
+        "people": "Número de personas"
+      },
+      "subtotal": "Subtotal",
+      "buttons": {
+        "add_to_cart": "Agregar al carrito",
+        "added": "¡Agregado!"
+      },
+      "confirmation_note": "⚡ Confirmación inmediata vía email",
+      "trust_badges": {
+        "quick": "Confirmación rápida",
+        "secure": "Pago offline seguro"
+      }
+    },
+    "sections": {
+      "description_title": "Descripción de la experiencia",
+      "guidelines": {
+        "title": "Lineamientos de Reservación",
+        "p1": "Todos nuestros servicios de experiencias están <bold>sujetos a confirmación previa de disponibilidad</bold> por parte de nuestro equipo. La validación final se enviará una vez verificados los espacios operativos para la fecha seleccionada.",
+        "options_title": "En caso de falta de cupo o imprevistos técnicos en la fecha solicitada, el cliente podrá optar por:",
+        "option_a": "Reprogramación hacia una <bold>nueva fecha disponible</bold> sin cargos adicionales.",
+        "option_b": "Selección de una <bold>experiencia equivalente</bold> en la misma zona o de características similares."
+      },
+      "legal": {
+        "label": "Aviso Legal",
+        "text": "En cumplimiento con la <strong>Ley Federal de Protección al Consumidor</strong>, Viva Trip garantiza el derecho a la información clara sobre las condiciones del servicio. Cualquier ajuste en el itinerario se realizará siempre con el consentimiento expreso del titular de la reserva."
+      }
+    }
+  }
+}

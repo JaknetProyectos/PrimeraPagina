@@ -1,10 +1,16 @@
+"use client";
+
+import { useTranslations } from 'next-intl';
+
 export default function ExperienciasSection() {
+  const t = useTranslations('Experiences');
+
   return (
     <section id="experiencias" className="bg-[#1f1e58] py-20">
       <div className="container mx-auto px-4">
         {/* Big Title */}
-        <h2 className="font-anton text-[#e8e0c6] text-6xl md:text-8xl lg:text-[10rem] leading-none text-center mb-16">
-          EXPERIENCIAS
+        <h2 className="font-anton text-[#e8e0c6] text-6xl md:text-8xl lg:text-[10rem] leading-none text-center mb-16 uppercase">
+          {t('hero_title')}
         </h2>
 
         {/* Content Grid */}
@@ -17,7 +23,7 @@ export default function ExperienciasSection() {
             >
               <img
                 src="https://plus.unsplash.com/premium_photo-1732738372625-8dc6a664ec78?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Experiencias"
+                alt={t('image_alt')}
                 className="absolute inset-0 w-full h-full object-cover grayscale"
                 loading="eager"
               />
@@ -27,13 +33,15 @@ export default function ExperienciasSection() {
           {/* Text Content */}
           <div className="lg:w-2/3 text-white">
             <p className="text-[#e8e0c6] uppercase tracking-wider mb-2">
-              NUESTROS PLANES
+              {t('upper_subtitle')}
             </p>
             <h3 className="font-anton text-[#e8e0c6] text-4xl lg:text-5xl mb-6">
-              Aviso Importante
+              {t('notice_title')}
             </h3>
             <p className="text-white/80 leading-relaxed">
-              El servicio de experiencia <span className="font-semibold text-white">no incluye transporte hacia o desde el punto de encuentro</span>. En caso de requerirse, el traslado deberá ser gestionado y cubierto directamente por el cliente. La empresa no asume responsabilidad por retrasos, contratiempos o gastos derivados del transporte externo contratado por el participante.
+              {t.rich('notice_description', {
+                bold: (chunks) => <span className="font-semibold text-white">{chunks}</span>
+              })}
             </p>
           </div>
         </div>

@@ -1,4 +1,10 @@
+"use client";
+
+import { useTranslations } from 'next-intl';
+
 export default function MisionSection() {
+  const t = useTranslations('Mission');
+
   return (
     <section className="relative min-h-[60vh] bg-[#326240]">
       {/* Background Image */}
@@ -12,13 +18,13 @@ export default function MisionSection() {
 
       <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col items-center justify-center min-h-[60vh] text-center">
         {/* Mission Title with Gradient */}
-        <h2 className="font-anton text-7xl text-white md:text-9xl lg:text-[12rem] text-gradient-mission opacity-80 mb-8">
-          MISIÓN
+        <h2 className="font-anton text-7xl text-white md:text-9xl lg:text-[12rem] text-gradient-mission opacity-80 mb-8 uppercase">
+          {t('title')}
         </h2>
 
         {/* Mission Text */}
         <p className="text-white text-lg md:text-xl lg:text-2xl max-w-4xl leading-relaxed font-light">
-          Inspirar a cada viajero a descubrir la magia de México con seguridad, comodidad y un toque de aventura. Queremos que cada experiencia sea un puente entre tu curiosidad y la riqueza cultural y natural que nos rodea.
+          {t('description')}
         </p>
       </div>
     </section>

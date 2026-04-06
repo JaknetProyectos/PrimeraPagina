@@ -1,16 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, Check } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Check, Loader2 } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 export default function ContactSection() {
+  const t = useTranslations('Contact');
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
     mensaje: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false); // Estado para el botón
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,14 +28,13 @@ export default function ContactSection() {
       if (response.ok) {
         setSubmitted(true);
         setFormData({ nombre: "", email: "", mensaje: "" });
-        // Opcional: Volver a mostrar el formulario después de 5 segundos
         setTimeout(() => setSubmitted(false), 5000);
       } else {
-        alert("Hubo un error al enviar el mensaje. Intenta de nuevo.");
+        alert(t('error_message'));
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error de conexión.");
+      alert(t('connection_error'));
     } finally {
       setLoading(false);
     }
@@ -46,10 +47,10 @@ export default function ContactSection() {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-2xl font-medium text-[var(--md-on-surface)]">
-              Contáctanos
+              {t('title')}
             </h2>
             <p className="text-[var(--md-on-surface-medium)] mt-2">
-              ¿Tienes preguntas? Estamos aquí para ayudarte
+              {t('subtitle')}
             </p>
           </div>
 
@@ -61,9 +62,9 @@ export default function ContactSection() {
                   <Phone className="w-5 h-5 text-[var(--md-primary)]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[var(--md-on-surface)]">Teléfono</h3>
+                  <h3 className="font-medium text-[var(--md-on-surface)]">{t('info.phone.label')}</h3>
                   <p className="text-[var(--md-on-surface-medium)] mt-1">+52 55 1234 1234</p>
-                  <p className="text-sm text-[var(--md-on-surface-disabled)]">Lun - Vie, 9am - 6pm</p>
+                  <p className="text-sm text-[var(--md-on-surface-disabled)]">{t('info.phone.hours')}</p>
                 </div>
               </div>
 
@@ -72,9 +73,9 @@ export default function ContactSection() {
                   <Mail className="w-5 h-5 text-[var(--md-primary)]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[var(--md-on-surface)]">Email</h3>
+                  <h3 className="font-medium text-[var(--md-on-surface)]">{t('info.email.label')}</h3>
                   <p className="text-[var(--md-on-surface-medium)] mt-1">contacto@vivatrip.com.mx</p>
-                  <p className="text-sm text-[var(--md-on-surface-disabled)]">Respondemos en 24 horas</p>
+                  <p className="text-sm text-[var(--md-on-surface-disabled)]">{t('info.email.response')}</p>
                 </div>
               </div>
 
@@ -83,74 +84,75 @@ export default function ContactSection() {
                   <MapPin className="w-5 h-5 text-[var(--md-primary)]" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-[var(--md-on-surface)]">Ubicación</h3>
-                  <p className="text-[var(--md-on-surface-medium)] mt-1">Ciudad de México, México</p>
-                  <p className="text-sm text-[var(--md-on-surface-disabled)]">Visitas con cita previa</p>
+                  <h3 className="font-medium text-[var(--md-on-surface)]">{t('info.location.label')}</h3>
+                  <p className="text-[var(--md-on-surface-medium)] mt-1">{t('info.location.city')}</p>
+                  <p className="text-sm text-[var(--md-on-surface-disabled)]">{t('info.location.appointment')}</p>
                 </div>
               </div>
             </div>
 
             {/* Form */}
-            <div className="md-card p-6">
+            <div className="md-card p-6 bg-white shadow-sm border border-gray-100 rounded-sm">
               {submitted ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <div className="w-16 h-16 bg-[var(--md-success)]/10 rounded-full flex items-center justify-center mb-4">
-                    <Check className="w-8 h-8 text-[var(--md-success)]" />
+                  <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                    <Check className="w-8 h-8 text-green-600" />
                   </div>
-                  <h3 className="font-medium text-[var(--md-on-surface)] text-lg">
-                    Mensaje enviado
+                  <h3 className="font-medium text-gray-900 text-lg">
+                    {t('success.title')}
                   </h3>
-                  <p className="text-[var(--md-on-surface-medium)] mt-2">
-                    Nos pondremos en contacto pronto
+                  <p className="text-gray-500 mt-2">
+                    {t('success.description')}
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-[var(--md-on-surface)] mb-1">
-                      Nombre
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('form.name_label')}
                     </label>
                     <input
                       type="text"
                       value={formData.nombre}
                       onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                      className="md-input"
-                      placeholder="Tu nombre"
+                      className="w-full border-b-2 border-gray-200 py-2 outline-none focus:border-[#1976D2] transition-colors"
+                      placeholder={t('form.name_placeholder')}
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[var(--md-on-surface)] mb-1">
-                      Email
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('form.email_label')}
                     </label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="md-input"
-                      placeholder="tu@email.com"
+                      className="w-full border-b-2 border-gray-200 py-2 outline-none focus:border-[#1976D2] transition-colors"
+                      placeholder={t('form.email_placeholder')}
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[var(--md-on-surface)] mb-1">
-                      Mensaje
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('form.message_label')}
                     </label>
                     <textarea
                       value={formData.mensaje}
                       onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                      className="md-input resize-none"
+                      className="w-full border-b-2 border-gray-200 py-2 outline-none focus:border-[#1976D2] transition-colors resize-none"
                       rows={4}
-                      placeholder="¿En qué podemos ayudarte?"
+                      placeholder={t('form.message_placeholder')}
                       required
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full md-btn md-btn-primary flex items-center justify-center gap-2"
+                    disabled={loading}
+                    className="w-full bg-[#1976D2] text-white py-3 rounded-sm font-bold uppercase text-xs tracking-widest hover:bg-[#1565C0] transition-all flex items-center justify-center gap-2 disabled:opacity-70"
                   >
-                    <Send className="w-4 h-4" />
-                    Enviar mensaje
+                    {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                    {t('form.submit_button')}
                   </button>
                 </form>
               )}

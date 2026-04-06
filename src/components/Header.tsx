@@ -1,34 +1,33 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { useState } from "react";
-import { Menu, X, ShoppingBag, Settings, ShoppingCart } from "lucide-react";
+import { Menu, X, Settings, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useCart } from "@/context/cartContext";
-
-const navItems = [
-  { href: "/", label: "Conócenos" },
-  { href: "/armatuaventura", label: "Arma tu aventura" },
-  { href: "/experiencias", label: "Experiencias" },
-  { href: "/pasion", label: "Pasión futbolera" },
-];
-
-
-
+import { useTranslations } from 'next-intl';
 
 export default function Header() {
+  const t = useTranslations('Common');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cart } = useCart()
+  const { cart } = useCart();
+
+  const navItems = [
+    { href: "/", label: t('nav.about') },
+    { href: "/armatuaventura", label: t('nav.build_adventure') },
+    { href: "/experiencias", label: t('nav.experiences') },
+    { href: "/pasion", label: t('nav.football_passion') },
+  ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white elevation-2">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo.png"
-              alt="VivaTrip Logo"
+              alt="Logo"
               width={150}
               height={50}
               priority
@@ -38,13 +37,13 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
-                className="px-4 py-2 text-[var(--md-on-surface-medium)] hover:text-[var(--md-primary)] hover:bg-[var(--md-primary)]/5 rounded transition-colors font-medium text-sm uppercase tracking-wide"
+                className="px-4 py-2 text-gray-600 hover:text-[#03A9F4] hover:bg-gray-50 rounded transition-colors font-medium text-sm uppercase tracking-wide"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -54,10 +53,10 @@ export default function Header() {
               href="/cart"
               className="relative p-2 rounded-full hover:bg-gray-100 transition"
             >
-              <ShoppingCart className="w-6 h-6" />
+              <ShoppingCart className="w-6 h-6 text-gray-700" />
 
               {cart.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                <span className="absolute -top-1 -right-1 bg-[#FF9800] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
                   {cart.length}
                 </span>
               )}
@@ -66,7 +65,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               type="button"
-              className="md:hidden p-2 text-[var(--md-on-surface-medium)] hover:bg-gray-100 rounded-full transition-colors"
+              className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -77,17 +76,17 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <nav className="md:hidden bg-white border-t border-gray-100">
+        <nav className="md:hidden bg-white border-t border-gray-100 animate-in slide-in-from-top duration-300">
           <div className="container mx-auto px-4 py-2">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="block px-4 py-3 text-[var(--md-on-surface)] hover:bg-gray-50 rounded font-medium"
+                className="block px-4 py-3 text-gray-800 hover:bg-gray-50 rounded font-medium uppercase text-sm tracking-wider"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
         </nav>

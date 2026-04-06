@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { AlertTriangle, ArrowLeft, RefreshCcw } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 interface FullscreenErrorProps {
     title?: string;

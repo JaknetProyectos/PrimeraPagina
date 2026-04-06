@@ -35,7 +35,6 @@ export function CartProvider({ children }: any) {
   }, [cart]);
 
   const addToCart = (item: CartItem) => {
-    console.log(item)
     setCart(prev => {
       if (prev.find(i => i.experienceId === item.experienceId)) return prev;
       return [...prev, item];

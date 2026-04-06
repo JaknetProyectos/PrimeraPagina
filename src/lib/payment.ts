@@ -35,7 +35,6 @@ export async function processEtominPayment(payment: PaymentData) {
         etomin.auth(token);
 
         // 2. Tokenizar la tarjeta
-        console.log(payment)
         const tokenResponse = await etomin.postCardTokenizer({
             cardData: {
                 cardNumber: payment.cardData.number.replace(/\s/g, ''), // Limpiar espacios
@@ -46,7 +45,6 @@ export async function processEtominPayment(payment: PaymentData) {
         });
 
         const cardToken = tokenResponse.data.cardNumberToken;
-        console.log(tokenResponse.data)
 
         // 3. Realizar la Venta (Sale)
         // El código de moneda '484' es para Pesos Mexicanos (MXN)
@@ -74,7 +72,6 @@ export async function processEtominPayment(payment: PaymentData) {
         });
 
         // Retornamos la data si el status es aprobado (usualmente 'APPROVED' o '00')
-        console.log(saleResponse.data)
         return saleResponse.data;
 
     } catch (error: any) {

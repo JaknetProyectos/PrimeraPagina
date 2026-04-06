@@ -1,4 +1,11 @@
+"use client";
+
+import { Link } from "@/i18n/routing";
+import { useTranslations } from 'next-intl';
+
 export default function ArmaAventuraSection() {
+  const t = useTranslations('CustomAdventure');
+
   return (
     <section id="arma-aventura" className="relative min-h-screen bg-[#1f1e58]">
       {/* Background Image */}
@@ -11,10 +18,10 @@ export default function ArmaAventuraSection() {
 
       <div className="relative z-10 container mx-auto px-4 py-20">
         {/* Big Title */}
-        <h2 className="font-anton text-[#e8e0c6] text-6xl md:text-8xl lg:text-[10rem] leading-none text-center mb-16">
-          ARMA TU
+        <h2 className="font-anton text-[#e8e0c6] text-6xl md:text-8xl lg:text-[10rem] leading-none text-center mb-16 uppercase">
+          {t('hero_title_line1')}
           <br />
-          AVENTURA
+          {t('hero_title_line2')}
         </h2>
 
         {/* Content Grid */}
@@ -27,7 +34,7 @@ export default function ArmaAventuraSection() {
             >
               <img
                 src="https://plus.unsplash.com/premium_photo-1679669192872-1733bfda6df2?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Grupo de viajeros"
+                alt={t('image_alt')}
                 className="absolute inset-0 w-full h-full object-cover grayscale"
                 loading="eager"
               />
@@ -37,24 +44,26 @@ export default function ArmaAventuraSection() {
           {/* Text Content */}
           <div className="lg:w-2/3 text-white">
             <p className="text-[#e8e0c6] uppercase tracking-wider mb-2">
-              QUIERES ARMAR UN PLAN A LA MEDIDA
+              {t('upper_subtitle')}
             </p>
             <h3 className="font-anton text-[#e8e0c6] text-4xl lg:text-5xl mb-6">
-              Te ayudamos
+              {t('main_subtitle')}
             </h3>
             <p className="text-white/80 mb-4">
-              <span className="font-semibold text-white">¿Necesitas más información o quieres planear una aventura en grupo?</span>
+              <span className="font-semibold text-white">{t('question')}</span>
             </p>
             <p className="text-white/70 mb-8">
-              Si tienes dudas sobre nuestros servicios, deseas más detalles acerca de este tour o estás planeando una experiencia especial para un grupo de personas, <span className="font-semibold text-white underline cursor-pointer">contáctanos.</span>
+              {t.rich('contact_text', {
+                contact: (chunks) => <span className="font-semibold text-white underline cursor-pointer">{chunks}</span>
+              })}
             </p>
 
-            <a
-              href="#contactanos"
-              className="inline-block border-2 border-white/50 text-white px-12 py-4 rounded hover:bg-white hover:text-[#1f1e58] transition-all duration-300 font-medium"
+            <Link
+              href="/armatuaventura"
+              className="inline-block border-2 border-white/50 text-white px-12 py-4 rounded hover:bg-white hover:text-[#1f1e58] transition-all duration-300 font-medium uppercase tracking-widest text-sm"
             >
-              Arma tu aventura
-            </a>
+              {t('cta_button')}
+            </Link>
           </div>
         </div>
       </div>

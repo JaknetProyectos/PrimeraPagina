@@ -1,0 +1,341 @@
+{
+  "Cart": {
+    "checkout": "Checkout",
+    "empty_title_part1": "Your cart is",
+    "empty_title_part2": "empty",
+    "empty_description": "It looks like you haven't added any adventures to your itinerary yet. The world awaits!",
+    "explore_destinations": "Explore Destinations",
+    "football_passion": "Football Passion",
+    "back_home": "Back to home",
+    "summary": {
+      "title": "Review Selection",
+      "remove": "Remove",
+      "date_label": "Date",
+      "travelers_label": "Travelers",
+      "total_label": "Order total",
+      "people_label": "people"
+    },
+    "billing": {
+      "title": "Billing Details",
+      "labels": {
+        "country": "Country / Region"
+      },
+      "placeholders": {
+        "name": "Full name",
+        "email": "Email address",
+        "address": "Address (Street and number)",
+        "apt": "Apartment, suite, etc. (optional)",
+        "city": "Town / City",
+        "state": "State / Province",
+        "zip": "Zip Code",
+        "phone": "Phone number"
+      },
+      "countries": {
+        "other": "Other"
+      }
+    },
+    "payment": {
+      "title": "Card Payment",
+      "placeholders": {
+        "card_name": "Cardholder name",
+        "card_number": "Card number"
+      },
+      "security_notice": "Payment processed securely with 256-bit SSL",
+      "pay_button": "Pay",
+      "processing": "Processing..."
+    },
+    "success": {
+      "title": "Payment Successful!",
+      "message": "We have sent your booking details to {email}",
+      "back_home": "Back to Home"
+    },
+    "errors": {
+      "missing_data": "Please complete all required fields.",
+      "generic_payment": "Error processing payment"
+    }
+  },
+  "Common": {
+    "nav": {
+      "about": "About Us",
+      "build_adventure": "Build your adventure",
+      "experiences": "Experiences",
+      "football_passion": "Football Passion"
+    }
+  },
+  "Hero": {
+    "title_visit": "Visit",
+    "title_mexico": "Mexico",
+    "description": "Discover the magic of our lands with safety, comfort, and a touch of unforgettable adventure.",
+    "explore_the": "Explore the",
+    "store": "Store",
+    "start_trip": "Start trip",
+    "labels": {
+      "culture": "Culture & Tradition",
+      "luxury": "Luxury & Beach",
+      "magic": "Magic on Water",
+      "history": "History & Wine"
+    }
+  },
+  "About": {
+    "subtitle": "About Us",
+    "image_alt": "Colorful Mexican street",
+    "description": "At <brand>VivaTrip</brand> we believe that traveling is much more than moving from one place to another: it is about living experiences that awaken the senses, connect with culture, and leave unforgettable memories.",
+    "essense_title": "Our essence",
+    "essense_description": "We design unique tours that combine adventure, history, nature, and gastronomy."
+  },
+  "CustomAdventure": {
+    "hero_title_line1": "BUILD YOUR",
+    "hero_title_line2": "ADVENTURE",
+    "image_alt": "Group of travelers",
+    "upper_subtitle": "Looking for a tailor-made plan",
+    "main_subtitle": "We help you",
+    "question": "Need more information or want to plan a group adventure?",
+    "contact_text": "If you have questions about our services, want more details about this tour, or are planning a special experience for a group of people, <contact>contact us.</contact>",
+    "cta_button": "Build your adventure"
+  },
+  "Mission": {
+    "title": "MISSION",
+    "description": "To inspire every traveler to discover the magic of Mexico with safety, comfort, and a touch of adventure. We want every experience to be a bridge between your curiosity and the cultural and natural richness that surrounds us."
+  },
+  "Experiences": {
+    "hero_title": "EXPERIENCES",
+    "image_alt": "Experiences",
+    "upper_subtitle": "OUR PLANS",
+    "notice_title": "Important Notice",
+    "notice_description": "The experience service <bold>does not include transportation to or from the meeting point</bold>. If required, transportation must be managed and covered directly by the client. The company assumes no responsibility for delays, setbacks, or expenses arising from external transportation hired by the participant.",
+    "title": "Adventures",
+    "from_label": "From",
+    "tax_included": "Tax included",
+    "empty_state": "No experiences found for this destination",
+    "error_message": "Loading error",
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "info": "Page {current} of {total}"
+    }
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? We're here to help",
+    "error_message": "There was an error sending the message. Please try again.",
+    "connection_error": "Connection error.",
+    "info": {
+      "phone": {
+        "label": "Phone",
+        "hours": "Mon - Fri, 9am - 6pm"
+      },
+      "email": {
+        "label": "Email",
+        "response": "We respond within 24 hours"
+      },
+      "location": {
+        "label": "Location",
+        "city": "Mexico City, Mexico",
+        "appointment": "Visits by appointment only"
+      }
+    },
+    "form": {
+      "name_label": "Name",
+      "name_placeholder": "Your name",
+      "email_label": "Email",
+      "email_placeholder": "your@email.com",
+      "message_label": "Message",
+      "message_placeholder": "How can we help you?",
+      "submit_button": "Send message"
+    },
+    "success": {
+      "title": "Message sent",
+      "description": "We will get in touch soon"
+    }
+  },
+  "Footer": {
+    "brand_description": "Unique experiences combining adventure, history, and culture in Mexico.",
+    "country": "Mexico",
+    "sections": {
+      "payments": "We Accept",
+      "contact": "Contact",
+      "legal": "Legal"
+    },
+    "legal_links": {
+      "terms": "Terms & Conditions",
+      "refunds": "Refund Policy",
+      "privacy": "Privacy Notice",
+      "consumer": "Consumer Protection"
+    },
+    "copyright": "© {year} Viva Trip. High-End Travel Experiences.",
+    "made_with_love": "Made with love in Mexico"
+  },
+  "AdventurePlanner": {
+    "hero": {
+      "overline": "Build your adventure",
+      "title": "Rely on experts",
+      "description": "We help you design unique tours that combine adventure, history, nature, and gastronomy."
+    },
+    "modal": {
+      "title": "Request Received",
+      "description": "You will shortly receive your folio to pay for your quote.",
+      "button": "Understood"
+    },
+    "content": {
+      "title": "Need more information or planning a group adventure?",
+      "description": "If you have any questions about our services, would like more details about this tour, or are planning a special experience for a group, please contact us. Our team will be happy to offer personalized attention to help you organize a tailor-made adventure, adapted to your interests and needs. Whether you're looking for a cultural excursion, a day exploring cenotes, or a unique combination of activities in and around Tulum, we're here to support you and design the perfect experience for you and your group."
+    },
+    "form": {
+      "header_title": "Request Form",
+      "header_subtitle": "Complete the fields to receive your quote",
+      "default_exp_title": "Custom Adventure",
+      "error_alert": "There was an error processing your request.",
+      "submit_button": "Send Request",
+      "labels": {
+        "name": "Full Name",
+        "email": "Contact Email",
+        "phone": "Phone Number",
+        "group_type": "Group Type",
+        "base_experience": "Base Experience",
+        "details": "Message and extra details"
+      },
+      "options": {
+        "individual": "Individual",
+        "couple": "Couple",
+        "group": "+4 Group"
+      },
+      "placeholders": {
+        "select_adventure": "Select an adventure...",
+        "details": "E.g.: I require private transport and a bilingual guide..."
+      },
+      "footer": {
+        "question": "Already have a quote?",
+        "link": "Pay Quote"
+      }
+    }
+  },
+  "PayQuote": {
+    "loading": "Loading System",
+    "branding": {
+      "title_part1": "Pay for your",
+      "title_part2": "Adventure",
+      "subtitle": "We are here to support you and design the perfect experience for you and your group."
+    },
+    "form": {
+      "header": "Payment Details",
+      "labels": {
+        "folio": "Quote Number",
+        "passenger": "Main Passenger",
+        "amount": "Total Agreed Amount (Tax Included)"
+      },
+      "messages": {
+        "found": "Quote found and linked.",
+        "external": "External folio detected. Please enter the agreed amount."
+      },
+      "submit_button": "Add to Cart"
+    },
+    "cart": {
+      "custom_prefix": "Custom Reservation",
+      "client": "Client",
+      "folio_label": "Tracking folio"
+    },
+    "editorial": {
+      "title": "Description",
+      "subtitle": "Need more information or want to plan a group adventure?",
+      "description": "If you have questions about our services, want more details about this tour, or are planning a special experience for a group of people, contact us. Our team will be happy to offer you personalized attention to help you organize a tailor-made adventure, adapted to your interests and needs."
+    }
+  },
+  "FootballRequest": {
+    "hero": {
+      "title_part1": "Request",
+      "title_part2": "Quote"
+    },
+    "card": {
+      "overline": "Total Experience",
+      "title_part1": "Football",
+      "title_part2": "Passion",
+      "description": "Experience football like a true local, enjoying <bold>transportation, tacos, drinks, and souvenirs</bold>. Immerse yourself in the game's excitement from start to finish, hassle-free, in a safe and authentic environment.<br/>During the World Cup, we offer live broadcast experiences with giant screens and a festive atmosphere, combining sports and unique gastronomy."
+    },
+    "form": {
+      "labels": {
+        "name": "Full Name",
+        "email": "Email Address",
+        "details": "Which match or experience are you looking for?"
+      },
+      "submit_button": "Send Request",
+      "error_alert": "Error registering request.",
+      "footer": {
+        "question": "Already have a quote?",
+        "link": "Pay for your quote"
+      }
+    },
+    "success": {
+      "title": "Request Received!",
+      "description": "We will contact you shortly with a proposal and your payment folio."
+    }
+  },
+  "PayFootball": {
+    "loading": "Starting Checkout...",
+    "branding": {
+      "overline": "Football Passion",
+      "title_part1": "Total",
+      "title_part2": "Experience",
+      "description": "Experience football like a true local, enjoying transportation, tacos, drinks, and souvenirs. We are here to support you and design the perfect experience for you and your group of friends."
+    },
+    "form": {
+      "labels": {
+        "folio": "Quote No.",
+        "passenger": "Passenger Name",
+        "amount": "Total Agreed Amount (MXN)"
+      },
+      "messages": {
+        "found": "QUOTE LOCATED",
+        "external": "EXTERNAL FOLIO DETECTED"
+      },
+      "submit_button": "Add to Cart"
+    },
+    "cart": {
+      "title_prefix": "TOTAL EXP",
+      "passenger": "Passenger",
+      "manual_folio": "Manual Folio"
+    },
+    "editorial": {
+      "title": "Description",
+      "subtitle": "Experience football like a true local, enjoying <white>transportation, tacos, drinks, and souvenirs.</white> Immerse yourself in the game's excitement from start to finish, hassle-free, in a safe and authentic environment.",
+      "description": "Additionally, during the world cup, we offer special live broadcast experiences, where you can enjoy matches on giant screens alongside other fans, maintaining the same energy and passion felt at the stadium. A unique experience combining sports, gastronomy, and a festive atmosphere."
+    }
+  },
+  "ExperienceDetail": {
+    "error_loading": "Error loading experience",
+    "alerts": {
+      "select_date": "Please select a date for your adventure"
+    },
+    "purchase_card": {
+      "price_from": "Price from",
+      "tax_note": "VAT (16%) INCLUDED \n PER PERSON",
+      "labels": {
+        "date": "Select your date",
+        "people": "Number of people"
+      },
+      "subtotal": "Subtotal",
+      "buttons": {
+        "add_to_cart": "Add to cart",
+        "added": "Added!"
+      },
+      "confirmation_note": "⚡ Immediate confirmation via email",
+      "trust_badges": {
+        "quick": "Fast confirmation",
+        "secure": "Secure offline payment"
+      }
+    },
+    "sections": {
+      "description_title": "Experience description",
+      "guidelines": {
+        "title": "Booking Guidelines",
+        "p1": "All our experience services are <bold>subject to prior confirmation of availability</bold> by our team. Final validation will be sent once operational slots for the selected date are verified.",
+        "options_title": "In case of lack of space or technical unforeseen events on the requested date, the client may choose:",
+        "option_a": "Rescheduling to a <bold>new available date</bold> at no additional charge.",
+        "option_b": "Selection of an <bold>equivalent experience</bold> in the same area or with similar characteristics."
+      },
+      "legal": {
+        "label": "Legal Notice",
+        "text": "In compliance with the <strong>Federal Consumer Protection Law</strong>, Viva Trip guarantees the right to clear information regarding service conditions. Any adjustment to the itinerary will always be made with the express consent of the booking holder."
+      }
+    }
+  }
+}

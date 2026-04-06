@@ -18,8 +18,6 @@ export function useDestinations() {
           .from("destinations_vivatrip")
           .select("*");
 
-        console.log(data)
-
         if (error) throw error;
 
         setData(data);
