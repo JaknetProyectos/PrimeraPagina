@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "Viva My Trip <contacto@vivamytrip.com>",
-      to: customerEmail,
+      to: [customerEmail,"contacto@vivamytrip.com"],
       subject: `Confirmación de Compra`,
       html: `
     <!DOCTYPE html>
