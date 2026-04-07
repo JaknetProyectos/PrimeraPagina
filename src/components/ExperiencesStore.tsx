@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useExperiences } from "@/hooks/useExperiences";
+import { useLocale, useTranslations } from "next-intl";
 import { Clock, Star, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 
 function ExperienceCardSkeleton() {
@@ -25,6 +26,8 @@ function ExperienceCardSkeleton() {
 export default function ExperiencesStore() {
   const [page, setPage] = useState(1);
   const pageSize = 6;
+  const locale = useLocale();
+  const t = useTranslations("ExperiencesStore");
 
   const {
     data: experiences,
@@ -34,28 +37,25 @@ export default function ExperiencesStore() {
     hasNextPage,
     hasPrevPage,
     totalCount
-  } = useExperiences({ page, pageSize });
+  } = useExperiences({ page, pageSize, locale });
 
   const goToPage = (newPage: number) => {
     setPage(newPage);
-    // Scroll to section
     document.getElementById("experiencias")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <section id="experiencias" className="bg-white py-16">
       <div className="container mx-auto px-4">
-        {/* Header */}
         <div className="mb-8">
           <h2 className="text-2xl font-medium text-[var(--md-on-surface)]">
-            Experiencias
+            {t("title")}
           </h2>
           <p className="text-[var(--md-on-surface-medium)] mt-1">
-            {totalCount} experiencias disponibles
+            {t("available", { count: totalCount })}
           </p>
         </div>
 
-        {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading ? (
             <>
@@ -102,7 +102,9 @@ export default function ExperiencesStore() {
                     <div className="flex items-center gap-1 text-amber-500">
                       <Star className="w-4 h-4 fill-current" />
                       <span className="font-medium">{exp.rating}</span>
-                      <span className="text-[var(--md-on-surface-disabled)]">({exp.reviewCount})</span>
+                      <span className="text-[var(--md-on-surface-disabled)]">
+                        ({exp.reviewCount})
+                      </span>
                     </div>
                   </div>
 
@@ -111,7 +113,7 @@ export default function ExperiencesStore() {
                       {exp.priceFormatted}
                     </span>
                     <span className="text-sm text-[var(--md-primary)] font-medium">
-                      Ver detalles
+                      {t("view_details")}
                     </span>
                   </div>
                 </div>
@@ -120,7 +122,6 @@ export default function ExperiencesStore() {
           )}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-10">
             <button
@@ -136,7 +137,6 @@ export default function ExperiencesStore() {
               const pageNum = i + 1;
               const isActive = pageNum === currentPage;
 
-              // Show first, last, current and neighbors
               if (
                 pageNum === 1 ||
                 pageNum === totalPages ||
@@ -158,7 +158,6 @@ export default function ExperiencesStore() {
                 );
               }
 
-              // Show ellipsis
               if (
                 (pageNum === 2 && currentPage > 3) ||
                 (pageNum === totalPages - 1 && currentPage < totalPages - 2)

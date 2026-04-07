@@ -8,23 +8,16 @@ interface UseExperiencesOptions {
   destinationSlug?: string;
   page?: number;
   pageSize?: number;
-}
-
-interface UseExperiencesResult {
-  data: Experience[];
-  loading: boolean;
-  error: Error | null;
-  totalCount: number;
-  totalPages: number;
-  currentPage: number;
-  hasNextPage: boolean;
-  hasPrevPage: boolean;
+  locale?: string;
 }
 
 export function useExperiences(options: UseExperiencesOptions = {}) {
-  // 1. Memorizamos las opciones para evitar que el useEffect se dispare 
-  // si el componente padre se renderiza con un objeto nuevo {}.
-  const { destinationSlug, page = 1, pageSize = 6 } = options;
+  const {
+    destinationSlug,
+    page = 1,
+    pageSize = 6,
+    locale = "es"
+  } = options;
 
   const [state, setState] = useState({
     data: [] as Experience[],
@@ -34,7 +27,6 @@ export function useExperiences(options: UseExperiencesOptions = {}) {
   });
 
   useEffect(() => {
-    // AbortController para cancelar peticiones si el usuario cambia de página rápido
     const controller = new AbortController();
 
     const fetchExperiences = async () => {
@@ -54,17 +46,27 @@ export function useExperiences(options: UseExperiencesOptions = {}) {
 
         const { data, error, count } = await query
           .range(from, to)
-          .abortSignal(controller.signal); // Vinculamos la cancelación
+          .abortSignal(controller.signal);
 
         if (error) throw error;
 
         const mapped = (data || []).map((e) => ({
-          ...e, // Si los nombres coinciden, puedes simplificar
+          ...e,
           destinationSlug: e.destination_slug,
-          destinationName: e.destination_name,
+          destinationName:
+            locale === "en"
+              ? (e.destination_name_en || e.destination_name)
+              : e.destination_name,
+          title: locale === "en" ? (e.title_en || e.title) : e.title,
+          description:
+            locale === "en"
+              ? (e.description_en || e.description)
+              : e.description,
+          duration: locale === "en" ? (e.duration_en || e.duration) : e.duration,
+          category: locale === "en" ? (e.category_en || e.category) : e.category,
           images: e.images || [e.image],
           priceFormatted: e.price_formatted,
-          reviewCount: e.review_count,
+          reviewCount: e.review_count
         }));
 
         setState({
@@ -74,7 +76,7 @@ export function useExperiences(options: UseExperiencesOptions = {}) {
           error: null
         });
       } catch (err: any) {
-        if (err.name !== 'AbortError') {
+        if (err.name !== "AbortError") {
           setState(prev => ({ ...prev, error: err, loading: false }));
         }
       }
@@ -82,8 +84,8 @@ export function useExperiences(options: UseExperiencesOptions = {}) {
 
     fetchExperiences();
 
-    return () => controller.abort(); // Limpieza al desmontar
-  }, [destinationSlug, page, pageSize]); // Dependencias estables
+    return () => controller.abort();
+  }, [destinationSlug, page, pageSize, locale]);
 
   const totalPages = Math.ceil(state.totalCount / pageSize);
 

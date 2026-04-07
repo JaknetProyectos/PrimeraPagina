@@ -1,4 +1,9 @@
 {
+  "ExperiencesStore": {
+  "title": "Experiences",
+  "available": "{count} experiences available",
+  "view_details": "View details"
+  },
   "Cart": {
     "checkout": "Checkout",
     "empty_title_part1": "Your cart is",

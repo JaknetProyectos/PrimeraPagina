@@ -1,4 +1,9 @@
 {
+  "ExperiencesStore": {
+  "title": "Experiencias",
+  "available": "{count} experiencias disponibles",
+  "view_details": "Ver detalles"
+  },
   "Cart": {
     "checkout": "Pagar",
     "empty_title_part1": "Tu carrito está",
