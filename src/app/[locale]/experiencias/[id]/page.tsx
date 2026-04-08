@@ -150,7 +150,7 @@ export default function ExperienceDetailPage() {
                                 <div className="flex justify-between items-end">
                                     <div>
                                         <p className="text-sm text-gray-400 font-bold uppercase">{t('purchase_card.price_from')}</p>
-                                        <div className="text-4xl font-black text-gray-900">{data.priceFormatted}</div>
+                                        <div className="text-4xl font-black text-gray-900">MXN {data.priceFormatted}</div>
                                     </div>
                                     <div className="text-right text-xs text-gray-400 font-medium">
                                         {t('purchase_card.tax_note')}

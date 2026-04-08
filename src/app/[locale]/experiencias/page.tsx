@@ -82,7 +82,7 @@ export default function ExperiencesPage() {
                                         <div className="flex flex-col">
                                             <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">{t('from_label')}</span>
                                             <p className="text-2xl font-black text-black tracking-tighter leading-none">
-                                                {exp.priceFormatted}
+                                                MXN {exp.priceFormatted}
                                             </p>
                                         </div>
                                         <p className="text-[9px] text-blue-500 mb-1 uppercase font-black tracking-widest">{t('tax_included')}</p>
